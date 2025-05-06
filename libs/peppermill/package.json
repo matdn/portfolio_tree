@@ -1,0 +1,8 @@
+{
+    "name": "peppermill",
+    "version": "1.0.2",
+    "description": "Convert i18n json to accessible text files",
+    "documentation" : "https://app.clickup.com/3684641/v/dc/3ge91-61142/3ge91-19602",
+    "main": "index.ts",
+    "license": "ISC"
+}

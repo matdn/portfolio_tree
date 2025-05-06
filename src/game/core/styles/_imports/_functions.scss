@@ -1,0 +1,3 @@
+@function assetUrl($url){
+    @return url("/assets/game/#{$url}");
+}

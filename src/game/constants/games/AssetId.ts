@@ -1,0 +1,22 @@
+export enum AssetId {
+    NONE = 'NONE',
+
+
+    // 3D models
+    GLTF_MAIN = 'GLTF_MAIN',
+    GLTF_COMMON = 'GLTF_COMMON',
+
+
+    IMAGE_ONE = 'IMAGE_ONE',
+    IMAGE_TWO = 'IMAGE_TWO',
+    IMAGE_THREE = 'IMAGE_THREE',
+    IMAGE_FOUR = 'IMAGE_FOUR',
+    IMAGE_FIVE = 'IMAGE_FIVE',
+    IMAGE_SIX = 'IMAGE_SIX',
+    IMAGE_SEVEN = 'IMAGE_SEVEN',
+    IMAGE_EIGHT = 'IMAGE_EIGHT',
+    IMAGE_NINE = 'IMAGE_NINE',
+
+
+    HDR_STUDIO = 'HDR_STUDIO',
+}

@@ -1,0 +1,24 @@
+{
+  "title": "Musée de l’Orangerie",
+  "subtitle": "Expérience interactive en 3D",
+  "videoUrl": "./images/orangerieVideo.mp4",
+  "heroImage": "./images/orangerie1.png",
+  "description": [
+    "Ce projet propose une visite immersive et poétique du <span>musée de l’Orangerie</span>, pensée comme une <span>narration interactive</span> en ligne. Réalisée avec <span>Three.js</span> et <span>Blender</span>, l’expérience se découpe en deux grandes parties : le <span>lobby</span> et la <span>section musée</span>.",
+    "Dans le <span>lobby</span>, l'utilisateur découvre une <span>scène stylisée</span> et <span>atmosphérique</span> qui sert de point d'entrée à l'expérience. Inspiré par l'idée d'une <span>interface vivante</span>, ce hall d'accueil en 3D pose les bases de l'<span>univers visuel</span> du projet, entre <span>architecture moderne</span> et <span>ambiance lumineuse</span>."
+  ],
+  "mission": "We aim to craft immersive, impactful solutions that empower culture and tech to blend into accessible and emotional experiences.",
+  "values": "We believe in creativity, collaboration, quality and sustainability. Each piece is made with attention to storytelling, design and emotion.",
+  "vision": "To become a trusted leader in the creative industry, creating unforgettable futures that inspire connections and drive long-term success.",
+  "sections": [
+    {
+      "images": [
+        "./assets/game/images/orangerie1.png",
+        "./assets/game/images/orangerie0.png",
+        "./assets/game/images/orangerie3.png",
+        "./assets/game/images/orangerie2.png"
+      ],
+      "paragraphs": [ "La section musée nous plonge au cœur d’un parcours narratif autour de <span class='textBackground bg-cover bg-center text-transparent bg-clip-text'>Claude Monet</span> et de son lien avec l’Orangerie." ]
+    }
+  ]
+}

@@ -1,0 +1,164 @@
+[
+    {
+      "name": "EPISODE1",
+      "title": "Episode1.Title",
+      "description": "Description of Episode 1",
+      "status": "AVAILABLE",
+      "startDate": "2021-01-01T00:00:00.000Z",
+      "endDate": "2021-01-31T00:00:00.000Z",
+      "thumbnailUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfZcpvdnbhcRhQ_D-Gxk2yO_MEYCH6hGioKYRiM_rQjZJPez2kxbJ-ODzXYUFtU2uTh78&usqp=CAU",
+      "score": 0,
+      "maxScore": 0,
+      "timeSpent": 0,
+      "customData": [],
+      "scenes": [
+        {
+          "name": "SCENE1",
+          "elements": [
+            {
+              "name": "QUIZZ_1",
+              "allowCustomScore": false,
+              "score": 0,
+              "isCollected": false
+            },
+            {
+              "name": "QUIZZ_2",
+              "allowCustomScore": false,
+              "score": 0,
+              "isCollected": false
+            }
+          ]
+        }
+      ]
+    },
+  {
+    "name": "EPISODE_2",
+    "title": "Episode 2",
+    "description": "Description of Episode 2",
+    "status": "BLOCKED",
+    "startDate": "2021-01-01T00:00:00.000Z",
+    "endDate": "2021-01-31T00:00:00.000Z",
+    "thumbnailUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfZcpvdnbhcRhQ_D-Gxk2yO_MEYCH6hGioKYRiM_rQjZJPez2kxbJ-ODzXYUFtU2uTh78&usqp=CAU",
+    "score": 0,
+    "maxScore": 0,
+    "timeSpent": 0,
+    "customData": [],
+    "scenes": [
+      {
+        "name": "SCENE_1",
+        "elements": [
+          {
+            "name": "ELEMENT_1",
+            "allowCustomScore": true,
+            "score": 0,
+            "isCollected": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "EPISODE_3",
+    "title": "Episode 3",
+    "description": "Description of Episode 3",
+    "status": "BLOCKED",
+    "startDate": "2021-01-01T00:00:00.000Z",
+    "endDate": "2021-01-31T00:00:00.000Z",
+    "thumbnailUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfZcpvdnbhcRhQ_D-Gxk2yO_MEYCH6hGioKYRiM_rQjZJPez2kxbJ-ODzXYUFtU2uTh78&usqp=CAU",
+    "score": 0,
+    "maxScore": 0,
+    "timeSpent": 0,
+    "customData": [],
+    "scenes": [
+      {
+        "name": "SCENE_1",
+        "elements": [
+          {
+            "name": "ELEMENT_1",
+            "allowCustomScore": true,
+            "score": 0,
+            "isCollected": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "EPISODE_4",
+    "title": "Episode 4",
+    "description": "Description of Episode 4",
+    "status": "BLOCKED",
+    "startDate": "2021-01-01T00:00:00.000Z",
+    "endDate": "2021-01-31T00:00:00.000Z",
+    "thumbnailUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfZcpvdnbhcRhQ_D-Gxk2yO_MEYCH6hGioKYRiM_rQjZJPez2kxbJ-ODzXYUFtU2uTh78&usqp=CAU",
+    "score": 0,
+    "maxScore": 0,
+    "timeSpent": 0,
+    "customData": [],
+    "scenes": [
+      {
+        "name": "SCENE_1",
+        "elements": [
+          {
+            "name": "ELEMENT_1",
+            "allowCustomScore": true,
+            "score": 0,
+            "isCollected": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "EPISODE_5",
+    "title": "Episode 5",
+    "description": "Description of Episode 5",
+    "status": "BLOCKED",
+    "startDate": "2021-01-01T00:00:00.000Z",
+    "endDate": "2021-01-31T00:00:00.000Z",
+    "thumbnailUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfZcpvdnbhcRhQ_D-Gxk2yO_MEYCH6hGioKYRiM_rQjZJPez2kxbJ-ODzXYUFtU2uTh78&usqp=CAU",
+    "score": 0,
+    "maxScore": 0,
+    "timeSpent": 0,
+    "customData": [],
+    "scenes": [
+      {
+        "name": "SCENE_1",
+        "elements": [
+          {
+            "name": "ELEMENT_1",
+            "allowCustomScore": true,
+            "score": 0,
+            "isCollected": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "EPISODE_6",
+    "title": "Episode 6",
+    "description": "Description of Episode 6",
+    "status": "BLOCKED",
+    "startDate": "2021-01-01T00:00:00.000Z",
+    "endDate": "2021-01-31T00:00:00.000Z",
+    "thumbnailUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfZcpvdnbhcRhQ_D-Gxk2yO_MEYCH6hGioKYRiM_rQjZJPez2kxbJ-ODzXYUFtU2uTh78&usqp=CAU",
+    "score": 0,
+    "maxScore": 0,
+    "timeSpent": 0,
+    "customData": [],
+    "scenes": [
+      {
+        "name": "SCENE_1",
+        "elements": [
+          {
+            "name": "ELEMENT_1",
+            "allowCustomScore": true,
+            "score": 0,
+            "isCollected": false
+          }
+        ]
+      }
+    ]
+  }
+]

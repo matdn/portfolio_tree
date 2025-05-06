@@ -1,0 +1,8 @@
+{
+    "name": "spices",
+    "version": "1.0.4",
+    "description": "All common constant files",
+    "documentation": "https://app.clickup.com/3684641/v/dc/3ge91-61142/3ge91-19562",
+    "main": "index.ts",
+    "license": "ISC"
+}

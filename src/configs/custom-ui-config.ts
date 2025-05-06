@@ -1,0 +1,16 @@
+export const CustomUiConfig = {
+  participant: false,
+  dateValidation: false,
+  selectLanguage: false,
+  selectEpisode: false,
+  congratulation: false,
+  rating: false,
+  leaderboard: false,
+  end: false,
+  button: false,
+  rotationDialog: true,
+  closeScormDialog: false,
+  signup: false,
+  certificate: false,
+  appPassword: false,
+}

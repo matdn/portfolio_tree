@@ -1,0 +1,48 @@
+{
+    "title": "Musée de l’Orangerie",
+    "subtitle": "expérience interactive en 3D",
+    "videoUrl": "./images/orangerieVideo.mp4",
+    "description": [
+        "Ce projet propose une visite immersive et poétique du musée de l’Orangerie, pensée comme une narration interactive en ligne. Réalisée avec <strong>Three.js</strong> et <strong>Blender</strong>, l’expérience se découpe en deux grandes parties : le lobby et la section musée.",
+        "Dans le <strong>lobby</strong>, l'utilisateur découvre une scène stylisée et atmosphérique qui sert de point d'entrée à l'expérience. Inspiré par l'idée d'une interface vivante, ce hall d'accueil en 3D pose les bases de l'univers visuel du projet, entre <strong>architecture moderne</strong> et <strong>ambiance lumineuse</strong>."
+    ],
+    "sections": [
+        {
+            "images": [
+                "./images/orangerie1.png",
+                "./images/orangerie0.png",
+                "./images/orangerie3.png",
+                "./images/museum.png"
+            ],
+            "paragraphs": [
+                "La <strong>section musée</strong> nous plonge au cœur d’un parcours narratif autour de Claude Monet et de son lien avec l’Orangerie. Chaque espace met en lumière une facette de son œuvre ou de l’histoire du lieu : de la serre d'origine aux Nymphéas, en passant par la naissance de l'impressionnisme.",
+                "Le tout est rythmé par des <strong>animations douces au scroll</strong>, des <strong>shaders inspirés</strong> des textures de la peinture, et une <strong>ambiance sonore discrète</strong> qui renforce l'immersion.",
+                "Ce projet est une manière de faire dialoguer contenu culturel, narration visuelle et technologie, pour transformer une visite virtuelle en une véritable expérience sensorielle."
+            ]
+        },
+        {
+            "images": [
+                "./images/orangerie4.png"
+            ],
+            "paragraphs": [
+                "MISSION\n\nWe aim to craft innovative, impactful solutions that empower brands to tell their story, connect with their audiences, and inspire action. We believe in the power of design and technology to create meaningful experiences."
+            ]
+        },
+        {
+            "images": [
+                "./images/orangerie5.png"
+            ],
+            "paragraphs": [
+                "VALUES\n\nWe believe in collaboration, creativity, curiosity, and a commitment to excellence. Our values drive every decision we make and every pixel we push."
+            ]
+        },
+        {
+            "images": [
+                "./images/orangerie6.png"
+            ],
+            "paragraphs": [
+                "VISION\n\nTo become a trusted leader in the creative industry, creating bold, beautiful futures that inspire connections and drive long-term success."
+            ]
+        }
+    ]
+}

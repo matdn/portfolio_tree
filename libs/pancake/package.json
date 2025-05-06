@@ -1,0 +1,8 @@
+{
+    "name": "pancake",
+    "version": "1.1.9",
+    "description": "Theaters & Views Management system",
+    "documentation": "https://app.clickup.com/3684641/v/dc/3ge91-61142/3ge91-19502",
+    "main": "index.ts",
+    "license": "ISC"
+}

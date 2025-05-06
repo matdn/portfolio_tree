@@ -1,0 +1,852 @@
+{
+  "data": {
+    "story": {
+      "name": "game-config",
+      "created_at": "2023-08-18T20:58:43.604Z",
+      "published_at": "2024-03-05T10:40:03.250Z",
+      "id": 356947287,
+      "uuid": "333be4f6-e9a7-4b94-a06d-ecc7dace6ecf",
+      "content": {
+        "_uid": "f8abf674-b544-477c-a4f2-efa84c4b44e2",
+        "theme": "light",
+        "favicon": {
+          "id": 11129532,
+          "alt": "",
+          "name": "",
+          "focus": "",
+          "title": "",
+          "source": "",
+          "filename": "https://a.storyblok.com/f/247460/103x56/f280edc6ee/logo-emeraude.png",
+          "copyright": "",
+          "fieldtype": "asset",
+          "meta_data": {},
+          "is_external_url": false
+        },
+        "episodes": [
+          {
+            "_uid": "cabe9c8b-3b06-4241-914c-c6e3b302ca76",
+            "image": {
+              "id": 10222104,
+              "alt": "",
+              "name": "",
+              "focus": "",
+              "title": "",
+              "source": "",
+              "filename": "https://a.storyblok.com/f/240539/1280x760/b37e7bf37d/capture-d-ecran-2023-07-06-a-10-51-12.png",
+              "copyright": "",
+              "fieldtype": "asset",
+              "meta_data": {},
+              "is_external_url": false
+            },
+            "title": "Episode 1",
+            "available": true,
+            "component": "episode",
+            "episodeId": "episode1",
+            "releaseDate": "2023-09-30 14:32",
+            "_editable": "<!--#storyblok#{\"name\": \"episode\", \"space\": \"247460\", \"uid\": \"cabe9c8b-3b06-4241-914c-c6e3b302ca76\", \"id\": \"356947287\"}-->"
+          },
+          {
+            "_uid": "e17d719d-05e5-448d-8c01-dd1980ce7f20",
+            "image": {
+              "id": 11187156,
+              "alt": "",
+              "name": "",
+              "focus": "",
+              "title": "",
+              "source": "",
+              "filename": "https://a.storyblok.com/f/247460/1648x803/d17b1216c0/image-20230913-140019.png",
+              "copyright": "",
+              "fieldtype": "asset",
+              "meta_data": {},
+              "is_external_url": false
+            },
+            "title": "Episode 2",
+            "available": true,
+            "component": "episode",
+            "episodeId": "episode2",
+            "releaseDate": "2023-09-04 14:32",
+            "_editable": "<!--#storyblok#{\"name\": \"episode\", \"space\": \"247460\", \"uid\": \"e17d719d-05e5-448d-8c01-dd1980ce7f20\", \"id\": \"356947287\"}-->"
+          },
+          {
+            "_uid": "024a2190-b0c0-4923-8f83-f3f5bf0e5ee1",
+            "image": {
+              "id": 10700077,
+              "alt": "",
+              "name": "",
+              "focus": "",
+              "title": "",
+              "source": "",
+              "filename": "https://a.storyblok.com/f/247460/248x248/7049f37979/multi.png",
+              "copyright": "",
+              "fieldtype": "asset",
+              "meta_data": {},
+              "is_external_url": false
+            },
+            "title": "Episode 3",
+            "available": false,
+            "component": "episode",
+            "episodeId": "episode3",
+            "releaseDate": "2024-05-16 14:03",
+            "_editable": "<!--#storyblok#{\"name\": \"episode\", \"space\": \"247460\", \"uid\": \"024a2190-b0c0-4923-8f83-f3f5bf0e5ee1\", \"id\": \"356947287\"}-->"
+          }
+        ],
+        "gameLink": {
+          "id": "",
+          "url": "",
+          "linktype": "story",
+          "fieldtype": "multilink",
+          "cached_url": ""
+        },
+        "gameLogo": {
+          "id": 11129532,
+          "alt": "",
+          "name": "",
+          "focus": "",
+          "title": "",
+          "source": "",
+          "filename": "https://a.storyblok.com/f/247460/103x56/f280edc6ee/logo-emeraude.png",
+          "copyright": "",
+          "fieldtype": "asset",
+          "meta_data": {},
+          "is_external_url": false
+        },
+        "component": "page",
+        "gameModes": [
+          {
+            "_uid": "14aec2ea-f76c-407d-803e-e20cc455003a",
+            "name": "Solo Player",
+            "image": {
+              "id": 10693037,
+              "alt": "",
+              "name": "",
+              "focus": "",
+              "title": "",
+              "source": "",
+              "filename": "https://a.storyblok.com/f/246317/248x248/31b13320f2/solo.png",
+              "copyright": "",
+              "fieldtype": "asset",
+              "meta_data": {},
+              "is_external_url": false
+            },
+            "value": "soloplayer",
+            "component": "gameMode",
+            "_editable": "<!--#storyblok#{\"name\": \"gameMode\", \"space\": \"247460\", \"uid\": \"14aec2ea-f76c-407d-803e-e20cc455003a\", \"id\": \"356947287\"}-->"
+          },
+          {
+            "_uid": "ce87214c-c1e3-478d-b058-241ed04fe5e5",
+            "name": "Multiplayer",
+            "image": {
+              "id": 10700077,
+              "alt": "",
+              "name": "",
+              "focus": "",
+              "title": "",
+              "source": "",
+              "filename": "https://a.storyblok.com/f/247460/248x248/7049f37979/multi.png",
+              "copyright": "",
+              "fieldtype": "asset",
+              "meta_data": {},
+              "is_external_url": false
+            },
+            "value": "multiplayer",
+            "component": "gameMode",
+            "_editable": "<!--#storyblok#{\"name\": \"gameMode\", \"space\": \"247460\", \"uid\": \"ce87214c-c1e3-478d-b058-241ed04fe5e5\", \"id\": \"356947287\"}-->"
+          }
+        ],
+        "gameTitle": "Emeraude Boilerplate",
+        "iconColor": "#22c55e",
+        "iconTheme": [],
+        "menuIcons": [
+          {
+            "_uid": "87e7b29e-ef24-4b3f-98ff-afa504dd9657",
+            "type": "image",
+            "caption": "",
+            "content": {
+              "id": null,
+              "alt": null,
+              "name": "",
+              "focus": null,
+              "title": null,
+              "source": null,
+              "filename": "",
+              "copyright": null,
+              "fieldtype": "asset",
+              "meta_data": {}
+            },
+            "component": "dialogImage",
+            "_editable": "<!--#storyblok#{\"name\": \"dialogImage\", \"space\": \"247460\", \"uid\": \"87e7b29e-ef24-4b3f-98ff-afa504dd9657\", \"id\": \"356947287\"}-->"
+          },
+          {
+            "_uid": "653d6154-dc86-471d-9140-694ac9bd1597",
+            "type": "image",
+            "caption": "",
+            "content": {
+              "id": 10539375,
+              "alt": "",
+              "name": "",
+              "focus": "",
+              "title": "",
+              "source": "",
+              "filename": "https://a.storyblok.com/f/242060/62x62/1dcdc1e6e9/menu.svg",
+              "copyright": "",
+              "fieldtype": "asset",
+              "meta_data": {},
+              "is_external_url": false
+            },
+            "component": "dialogImage",
+            "_editable": "<!--#storyblok#{\"name\": \"dialogImage\", \"space\": \"247460\", \"uid\": \"653d6154-dc86-471d-9140-694ac9bd1597\", \"id\": \"356947287\"}-->"
+          }
+        ],
+        "teamModes": [
+          {
+            "_uid": "94e132fa-240e-4c15-a9f5-184c2b922c71",
+            "icon": {
+              "id": null,
+              "alt": null,
+              "name": "",
+              "focus": null,
+              "title": null,
+              "source": null,
+              "filename": "",
+              "copyright": null,
+              "fieldtype": "asset",
+              "meta_data": {}
+            },
+            "image": {
+              "id": 10688797,
+              "alt": "",
+              "name": "",
+              "focus": "",
+              "title": "",
+              "source": "",
+              "filename": "https://a.storyblok.com/f/246317/200x200/10351a8528/solo_icon.png",
+              "copyright": "",
+              "fieldtype": "asset",
+              "meta_data": {},
+              "is_external_url": false
+            },
+            "title": "Create a team",
+            "value": "create",
+            "component": "teamMode",
+            "_editable": "<!--#storyblok#{\"name\": \"teamMode\", \"space\": \"247460\", \"uid\": \"94e132fa-240e-4c15-a9f5-184c2b922c71\", \"id\": \"356947287\"}-->"
+          },
+          {
+            "_uid": "91531e55-0ce3-4d7f-85df-5b0fe288dcdc",
+            "icon": {
+              "id": null,
+              "alt": null,
+              "name": "",
+              "focus": null,
+              "title": null,
+              "source": null,
+              "filename": "",
+              "copyright": null,
+              "fieldtype": "asset",
+              "meta_data": {}
+            },
+            "image": {
+              "id": 10688808,
+              "alt": "",
+              "name": "",
+              "focus": "",
+              "title": "",
+              "source": "",
+              "filename": "https://a.storyblok.com/f/246317/200x200/501174901b/solo_icon.png",
+              "copyright": "",
+              "fieldtype": "asset",
+              "meta_data": {},
+              "is_external_url": false
+            },
+            "title": "Join a team",
+            "value": "join",
+            "component": "teamMode",
+            "_editable": "<!--#storyblok#{\"name\": \"teamMode\", \"space\": \"247460\", \"uid\": \"91531e55-0ce3-4d7f-85df-5b0fe288dcdc\", \"id\": \"356947287\"}-->"
+          }
+        ],
+        "gameHasSSO": false,
+        "gameQRCode": {
+          "id": null,
+          "alt": null,
+          "name": "",
+          "focus": null,
+          "title": null,
+          "source": null,
+          "filename": "",
+          "copyright": null,
+          "fieldtype": "asset",
+          "meta_data": {}
+        },
+        "onboarding": [],
+        "backBtnIcon": {
+          "id": 11908886,
+          "alt": "",
+          "name": "",
+          "focus": "",
+          "title": "",
+          "source": "",
+          "filename": "https://a.storyblok.com/f/247460/56x56/7cb536d0ce/back-arrow.svg",
+          "copyright": "",
+          "fieldtype": "asset",
+          "meta_data": {},
+          "is_external_url": false
+        },
+        "gameHasTime": false,
+        "shareSocial": [],
+        "hideGameMenu": false,
+        "spinnerColor": "#10b981",
+        "gameHasAvatar": false,
+        "gameHasPoints": false,
+        "gameStartDate": "2024-02-15 22:58",
+        "isCompanyGame": false,
+        "gameEndingFile": {
+          "id": null,
+          "alt": null,
+          "name": "",
+          "focus": null,
+          "title": null,
+          "filename": null,
+          "copyright": null,
+          "fieldtype": "asset",
+          "meta_data": {},
+          "is_external_url": false
+        },
+        "iconBackground": "",
+        "iconHoverColor": "#6b7280",
+        "gameDescription": "Description",
+        "gameMaxDuration": "1",
+        "isBlockedByCode": false,
+        "isBlockedByDate": true,
+        "isSelectCountry": false,
+        "gameHasOauth2SSO": false,
+        "hideMenuTutorial": false,
+        "authEmailRequired": false,
+        "companyClientLogo": {
+          "id": null,
+          "alt": null,
+          "name": "",
+          "focus": null,
+          "title": null,
+          "filename": null,
+          "copyright": null,
+          "fieldtype": "asset",
+          "meta_data": {},
+          "is_external_url": false
+        },
+        "gameHasEndingFile": false,
+        "onboardingBgImage": {
+          "id": null,
+          "alt": null,
+          "name": "",
+          "focus": null,
+          "title": null,
+          "filename": null,
+          "copyright": null,
+          "fieldtype": "asset",
+          "meta_data": {},
+          "is_external_url": false
+        },
+        "gameHasCertificate": false,
+        "gameSkipOnboarding": true,
+        "hideRotationDialog": false,
+        "howToDialogContent": [
+          {
+            "_uid": "34957ed4-28c4-4780-aa19-0c8718f480db",
+            "type": "title",
+            "content": "Global.AudioOrVideoNotWorking",
+            "component": "dialogTitle",
+            "_editable": "<!--#storyblok#{\"name\": \"dialogTitle\", \"space\": \"247460\", \"uid\": \"34957ed4-28c4-4780-aa19-0c8718f480db\", \"id\": \"356947287\"}-->"
+          },
+          {
+            "_uid": "99bbe2a7-2b82-43d2-8a75-d0c23a75a740",
+            "type": "subtitle",
+            "content": "Global.ActivateCameraAndMic",
+            "component": "dialogTitle",
+            "_editable": "<!--#storyblok#{\"name\": \"dialogTitle\", \"space\": \"247460\", \"uid\": \"99bbe2a7-2b82-43d2-8a75-d0c23a75a740\", \"id\": \"356947287\"}-->"
+          },
+          {
+            "_uid": "60d44c79-c896-4fe0-b87d-bd57987bf337",
+            "type": "text",
+            "content": {
+              "type": "doc",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "text": "Keytext",
+                      "type": "text"
+                    }
+                  ]
+                }
+              ]
+            },
+            "component": "dialogText",
+            "_editable": "<!--#storyblok#{\"name\": \"dialogText\", \"space\": \"247460\", \"uid\": \"60d44c79-c896-4fe0-b87d-bd57987bf337\", \"id\": \"356947287\"}-->"
+          },
+          {
+            "_uid": "ae27ff77-da46-4c8d-9f59-3acf275d01c6",
+            "type": "image",
+            "caption": "Tap Allow, and you're good to go!",
+            "content": {
+              "id": 10317248,
+              "alt": "",
+              "name": "",
+              "focus": "",
+              "title": "",
+              "source": "",
+              "filename": "https://a.storyblok.com/f/240539/1100x556/5b3ac08485/capture1-1.png",
+              "copyright": "",
+              "fieldtype": "asset",
+              "meta_data": {},
+              "is_external_url": false
+            },
+            "component": "dialogImage",
+            "_editable": "<!--#storyblok#{\"name\": \"dialogImage\", \"space\": \"247460\", \"uid\": \"ae27ff77-da46-4c8d-9f59-3acf275d01c6\", \"id\": \"356947287\"}-->"
+          },
+          {
+            "_uid": "03a2c3c7-4d93-4efe-a8e1-652af6259479",
+            "type": "text",
+            "content": {
+              "type": "doc",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "text": "If it doesn't work or the message didn't appear, follow these steps :",
+                      "type": "text"
+                    }
+                  ]
+                }
+              ]
+            },
+            "component": "dialogText",
+            "_editable": "<!--#storyblok#{\"name\": \"dialogText\", \"space\": \"247460\", \"uid\": \"03a2c3c7-4d93-4efe-a8e1-652af6259479\", \"id\": \"356947287\"}-->"
+          },
+          {
+            "_uid": "d4e4e87b-bf89-40fa-aec0-b066387456a1",
+            "type": "image",
+            "caption": "Go to the 3 points in the top right of your browser and select the Settings option from the dropdown menu.",
+            "content": {
+              "id": 10318545,
+              "alt": "",
+              "name": "",
+              "focus": "",
+              "title": "",
+              "source": "",
+              "filename": "https://a.storyblok.com/f/240539/714x1112/576add0ded/group-1176.png",
+              "copyright": "",
+              "fieldtype": "asset",
+              "meta_data": {},
+              "is_external_url": false
+            },
+            "component": "dialogImage",
+            "_editable": "<!--#storyblok#{\"name\": \"dialogImage\", \"space\": \"247460\", \"uid\": \"d4e4e87b-bf89-40fa-aec0-b066387456a1\", \"id\": \"356947287\"}-->"
+          },
+          {
+            "_uid": "21ee719d-b21e-49e2-bb09-3cb7b2e7d97b",
+            "type": "image",
+            "caption": "2. Click on Privacy and security > Site settings  > Camera.",
+            "content": {
+              "id": 10318565,
+              "alt": "",
+              "name": "",
+              "focus": "",
+              "title": "",
+              "source": "",
+              "filename": "https://a.storyblok.com/f/240539/776x206/821e754c22/group-1177.png",
+              "copyright": "",
+              "fieldtype": "asset",
+              "meta_data": {},
+              "is_external_url": false
+            },
+            "component": "dialogImage",
+            "_editable": "<!--#storyblok#{\"name\": \"dialogImage\", \"space\": \"247460\", \"uid\": \"21ee719d-b21e-49e2-bb09-3cb7b2e7d97b\", \"id\": \"356947287\"}-->"
+          },
+          {
+            "_uid": "43fd207b-29ae-4834-99f8-1079c5cd5cc2",
+            "type": "image",
+            "caption": "3. Select the first choice “Sites can ask to use your camera”",
+            "content": {
+              "id": 10317260,
+              "alt": "",
+              "name": "",
+              "focus": "",
+              "title": "",
+              "source": "",
+              "filename": "https://a.storyblok.com/f/240539/1576x463/3f15d5859d/capture10-1.png",
+              "copyright": "",
+              "fieldtype": "asset",
+              "meta_data": {},
+              "is_external_url": false
+            },
+            "component": "dialogImage",
+            "_editable": "<!--#storyblok#{\"name\": \"dialogImage\", \"space\": \"247460\", \"uid\": \"43fd207b-29ae-4834-99f8-1079c5cd5cc2\", \"id\": \"356947287\"}-->"
+          },
+          {
+            "_uid": "9076aa6e-b53a-4c46-ba98-f20d01145851",
+            "type": "image",
+            "caption": "4. Then click on Site settings  > Microphone.",
+            "content": {
+              "id": 10317262,
+              "alt": "",
+              "name": "",
+              "focus": "",
+              "title": "",
+              "source": "",
+              "filename": "https://a.storyblok.com/f/240539/1600x457/5abe1d8c98/group-1175.png",
+              "copyright": "",
+              "fieldtype": "asset",
+              "meta_data": {},
+              "is_external_url": false
+            },
+            "component": "dialogImage",
+            "_editable": "<!--#storyblok#{\"name\": \"dialogImage\", \"space\": \"247460\", \"uid\": \"9076aa6e-b53a-4c46-ba98-f20d01145851\", \"id\": \"356947287\"}-->"
+          },
+          {
+            "_uid": "c2768d68-b25c-4b0d-bfac-0ee252e2611a",
+            "type": "image",
+            "caption": "5. Select the first choice “Sites can ask to use your microphone”",
+            "content": {
+              "id": 10317263,
+              "alt": "",
+              "name": "",
+              "focus": "",
+              "title": "",
+              "source": "",
+              "filename": "https://a.storyblok.com/f/240539/1580x487/c53f45f593/capture6-1.png",
+              "copyright": "",
+              "fieldtype": "asset",
+              "meta_data": {},
+              "is_external_url": false
+            },
+            "component": "dialogImage",
+            "_editable": "<!--#storyblok#{\"name\": \"dialogImage\", \"space\": \"247460\", \"uid\": \"c2768d68-b25c-4b0d-bfac-0ee252e2611a\", \"id\": \"356947287\"}-->"
+          },
+          {
+            "_uid": "94e04843-ecd2-47c6-87c7-2db800415107",
+            "type": "image",
+            "caption": "7. Now refresh the game page, click on Allow  and you are ready to play !",
+            "content": {
+              "id": 10317266,
+              "alt": "",
+              "name": "",
+              "focus": "",
+              "title": "",
+              "source": "",
+              "filename": "https://a.storyblok.com/f/240539/1196x605/e0a7a18b16/group-1178.png",
+              "copyright": "",
+              "fieldtype": "asset",
+              "meta_data": {},
+              "is_external_url": false
+            },
+            "component": "dialogImage",
+            "_editable": "<!--#storyblok#{\"name\": \"dialogImage\", \"space\": \"247460\", \"uid\": \"94e04843-ecd2-47c6-87c7-2db800415107\", \"id\": \"356947287\"}-->"
+          },
+          {
+            "_uid": "f06e1ed7-2f33-4e96-b293-c1263923ada4",
+            "type": "subtitle",
+            "content": "Global.CameraAndMicrophoneNotWorking",
+            "component": "dialogTitle",
+            "_editable": "<!--#storyblok#{\"name\": \"dialogTitle\", \"space\": \"247460\", \"uid\": \"f06e1ed7-2f33-4e96-b293-c1263923ada4\", \"id\": \"356947287\"}-->"
+          },
+          {
+            "_uid": "0aadbd1b-7f3d-4804-9683-7b5bbf897b23",
+            "type": "image",
+            "caption": "Click on the camera icon at the top right and make sure to choose the right camera and microphone are selected from the dropdown lists and click on Done",
+            "content": {
+              "id": 10317269,
+              "alt": "",
+              "name": "",
+              "focus": "",
+              "title": "",
+              "source": "",
+              "filename": "https://a.storyblok.com/f/240539/816x952/2b67abdd9e/group-1183.png",
+              "copyright": "",
+              "fieldtype": "asset",
+              "meta_data": {},
+              "is_external_url": false
+            },
+            "component": "dialogImage",
+            "_editable": "<!--#storyblok#{\"name\": \"dialogImage\", \"space\": \"247460\", \"uid\": \"0aadbd1b-7f3d-4804-9683-7b5bbf897b23\", \"id\": \"356947287\"}-->"
+          },
+          {
+            "_uid": "91f83183-c7e9-45ef-8013-1456d6931d58",
+            "type": "text",
+            "content": {
+              "type": "doc",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "text": "Lobby.Tutorial.Text1",
+                      "type": "text"
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "text": "Lobby.Tutorial.Text2",
+                      "type": "text"
+                    }
+                  ]
+                },
+                {
+                  "type": "heading",
+                  "attrs": {
+                    "level": 2
+                  },
+                  "content": [
+                    {
+                      "text": "Lobby.Tutorial.Text3",
+                      "type": "text"
+                    }
+                  ]
+                }
+              ]
+            },
+            "component": "dialogText",
+            "_editable": "<!--#storyblok#{\"name\": \"dialogText\", \"space\": \"247460\", \"uid\": \"91f83183-c7e9-45ef-8013-1456d6931d58\", \"id\": \"356947287\"}-->"
+          },
+          {
+            "_uid": "83143b74-028c-4805-9e8d-3da83a820106",
+            "type": "image",
+            "caption": "1. Click right on your mouse and click on Inspect",
+            "content": {
+              "id": 10318443,
+              "alt": "",
+              "name": "",
+              "focus": "",
+              "title": "",
+              "source": "",
+              "filename": "https://a.storyblok.com/f/240539/547x511/23c01926b7/group-1179.png",
+              "copyright": "",
+              "fieldtype": "asset",
+              "meta_data": {},
+              "is_external_url": false
+            },
+            "component": "dialogImage",
+            "_editable": "<!--#storyblok#{\"name\": \"dialogImage\", \"space\": \"247460\", \"uid\": \"83143b74-028c-4805-9e8d-3da83a820106\", \"id\": \"356947287\"}-->"
+          },
+          {
+            "_uid": "06b16591-56a9-45e9-bee6-1ce0dbcca9bc",
+            "type": "image",
+            "caption": "2. Go to Console",
+            "content": {
+              "id": 10318468,
+              "alt": "",
+              "name": "",
+              "focus": "",
+              "title": "",
+              "source": "",
+              "filename": "https://a.storyblok.com/f/240539/1208x474/30f5f72012/group-1181.png",
+              "copyright": "",
+              "fieldtype": "asset",
+              "meta_data": {},
+              "is_external_url": false
+            },
+            "component": "dialogImage",
+            "_editable": "<!--#storyblok#{\"name\": \"dialogImage\", \"space\": \"247460\", \"uid\": \"06b16591-56a9-45e9-bee6-1ce0dbcca9bc\", \"id\": \"356947287\"}-->"
+          },
+          {
+            "_uid": "bb2401e4-3bbf-41ea-8e14-ccb48776d84b",
+            "type": "image",
+            "caption": "3. Take a screenshot of the red part and send it  to support@emeraude-escape.com",
+            "content": {
+              "id": 10318495,
+              "alt": "",
+              "name": "",
+              "focus": "",
+              "title": "",
+              "source": "",
+              "filename": "https://a.storyblok.com/f/240539/1546x684/56e50dcb3a/image-48.png",
+              "copyright": "",
+              "fieldtype": "asset",
+              "meta_data": {},
+              "is_external_url": false
+            },
+            "component": "dialogImage",
+            "_editable": "<!--#storyblok#{\"name\": \"dialogImage\", \"space\": \"247460\", \"uid\": \"bb2401e4-3bbf-41ea-8e14-ccb48776d84b\", \"id\": \"356947287\"}-->"
+          }
+        ],
+        "profileHasCategory": false,
+        "gameSkipLeaderboard": false,
+        "onlyShowMenuInScorm": false,
+        "authPasswordRequired": false,
+        "skipEpisodeSelection": false,
+        "teamModeNbMaxPlayers": "5",
+        "teamModeNbMinPlayers": "2",
+        "authPrivacyPolicyLink": {
+          "id": "",
+          "url": "https://www.google.com",
+          "linktype": "url",
+          "fieldtype": "multilink",
+          "cached_url": "https://www.google.com"
+        },
+        "gameCertificateGlobal": {
+          "id": "",
+          "url": "https://www.google.com",
+          "linktype": "url",
+          "fieldtype": "multilink",
+          "cached_url": "https://www.google.com"
+        },
+        "gameCertificateQRCode": {
+          "id": 10700077,
+          "alt": "",
+          "name": "",
+          "focus": "",
+          "title": "",
+          "source": "https://a.storyblok.com/f/247460/248x248/7049f37979/multi.png",
+          "filename": "https://a.storyblok.com/f/247460/248x248/7049f37979/multi.png",
+          "copyright": "",
+          "fieldtype": "asset",
+          "meta_data": {},
+          "content_type": "png",
+          "is_external_url": false
+        },
+        "gameCommentIsRequired": false,
+        "gameModeIsMultiplayer": false,
+        "rotationDialogContent": [
+          {
+            "_uid": "fc509ab7-01f1-4e9e-a51f-2741fc1a17c1",
+            "type": "image",
+            "caption": "",
+            "content": {
+              "id": 10536903,
+              "alt": "",
+              "name": "",
+              "focus": "",
+              "title": "",
+              "source": "",
+              "filename": "https://a.storyblok.com/f/242060/293x274/c1b987103b/rotate-to-landscape.svg",
+              "copyright": "",
+              "fieldtype": "asset",
+              "meta_data": {},
+              "is_external_url": false
+            },
+            "component": "dialogImage",
+            "_editable": "<!--#storyblok#{\"name\": \"dialogImage\", \"space\": \"247460\", \"uid\": \"fc509ab7-01f1-4e9e-a51f-2741fc1a17c1\", \"id\": \"356947287\"}-->"
+          },
+          {
+            "_uid": "bbabf459-fb22-4f6e-9845-18ed8cf379d2",
+            "type": "title",
+            "content": "turn your screen to",
+            "component": "dialogTitle",
+            "_editable": "<!--#storyblok#{\"name\": \"dialogTitle\", \"space\": \"247460\", \"uid\": \"bbabf459-fb22-4f6e-9845-18ed8cf379d2\", \"id\": \"356947287\"}-->"
+          },
+          {
+            "_uid": "9e9a58d6-eb37-4c3b-8cd3-439ad7bcb161",
+            "type": "text",
+            "content": {
+              "type": "doc",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "text": "Landscape mode",
+                      "type": "text"
+                    }
+                  ]
+                }
+              ]
+            },
+            "component": "dialogText",
+            "_editable": "<!--#storyblok#{\"name\": \"dialogText\", \"space\": \"247460\", \"uid\": \"9e9a58d6-eb37-4c3b-8cd3-439ad7bcb161\", \"id\": \"356947287\"}-->"
+          }
+        ],
+        "gameFeedbackIsRequired": false,
+        "gameHasLocalEndingFile": false,
+        "disableBoilerplateMedia": false,
+        "fullscreenDialogContent": [
+          {
+            "_uid": "1970b594-1756-40ea-a2a9-b1aaa585847d",
+            "type": "title",
+            "content": "Play fullscreen",
+            "component": "dialogTitle",
+            "_editable": "<!--#storyblok#{\"name\": \"dialogTitle\", \"space\": \"247460\", \"uid\": \"1970b594-1756-40ea-a2a9-b1aaa585847d\", \"id\": \"356947287\"}-->"
+          },
+          {
+            "_uid": "40f7db2c-35da-4a74-a0e4-4203038e1b78",
+            "type": "text",
+            "content": {
+              "type": "doc",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "text": "For a better experience, we recommand you to play fullscreen, with a headset.",
+                      "type": "text"
+                    }
+                  ]
+                },
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "text": "You can exit the fullscreen with the Escape button on your keyboard.",
+                      "type": "text"
+                    }
+                  ]
+                }
+              ]
+            },
+            "component": "dialogText",
+            "_editable": "<!--#storyblok#{\"name\": \"dialogText\", \"space\": \"247460\", \"uid\": \"40f7db2c-35da-4a74-a0e4-4203038e1b78\", \"id\": \"356947287\"}-->"
+          },
+          {
+            "_uid": "d4324e69-14af-42fe-90a2-cc8143f3434a",
+            "type": "image",
+            "caption": "",
+            "content": {
+              "id": 10537066,
+              "alt": "",
+              "name": "",
+              "focus": "",
+              "title": "",
+              "source": "",
+              "filename": "https://a.storyblok.com/f/242060/450x120/d1c656a04b/icons.svg",
+              "copyright": "",
+              "fieldtype": "asset",
+              "meta_data": {},
+              "is_external_url": false
+            },
+            "component": "dialogImage",
+            "_editable": "<!--#storyblok#{\"name\": \"dialogImage\", \"space\": \"247460\", \"uid\": \"d4324e69-14af-42fe-90a2-cc8143f3434a\", \"id\": \"356947287\"}-->"
+          }
+        ],
+        "fullscreenDialogVisible": false,
+        "teamModeIsInternalVisio": false,
+        "defaultSignUpEmailSuffix": "@emeraude.games",
+        "gameHasSignupAfterPlaying": false,
+        "enableDefaultScormTermination": false,
+        "shouldLoadRoomForCongratulation": false,
+        "useOfflineMode": false,
+        "_editable": "<!--#storyblok#{\"name\": \"page\", \"space\": \"247460\", \"uid\": \"f8abf674-b544-477c-a4f2-efa84c4b44e2\", \"id\": \"356947287\"}-->"
+      },
+      "slug": "game-config",
+      "full_slug": "game-config",
+      "sort_by_date": null,
+      "position": 0,
+      "tag_list": [],
+      "is_startpage": false,
+      "parent_id": 0,
+      "meta_data": null,
+      "group_id": "cdedcc26-9dc6-42ff-bf0b-0a5dae9fa741",
+      "first_published_at": "2023-07-08T16:04:19.475Z",
+      "release_id": null,
+      "lang": "default",
+      "path": null,
+      "alternates": [],
+      "default_full_slug": null,
+      "translated_slugs": null
+    },
+    "cv": 1716274337,
+    "rels": [],
+    "links": []
+  }
+}

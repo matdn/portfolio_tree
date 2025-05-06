@@ -1,0 +1,8 @@
+{
+    "name": "@cooker/three",
+    "version": "1.2.5",
+    "description": "Three Loaders and Assets Managers",
+    "documentation": "https://app.clickup.com/3684641/v/dc/3ge91-61142/3ge91-19522",
+    "main": "index.ts",
+    "license": "ISC"
+}

@@ -1,0 +1,137 @@
+@import './view/preloads.scss';
+@import './view/lobby.scss';
+@import './view/museum.scss';
+@import './view/components/buttons.scss';
+@import './view/galery.scss';
+
+@font-face {
+  font-family: 'Instrument';
+  src: url('../../../assets/game/fonts/InstrumentSerif-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.font-instrument {
+  font-family: 'Instrument', sans-serif;
+}
+
+@font-face {
+  font-family: 'Instrument Italic';
+  src: url('../../../assets/game/fonts/InstrumentSerif-Italic.ttf') format('truetype');
+  font-weight: normal;
+  font-style: italic;
+}
+
+.font-instrument-italic {
+  font-family: 'Instrument Italic', sans-serif;
+}
+
+@font-face {
+  font-family: 'NHaasGrotesk';
+  src: url('../../../assets/game/fonts/NHaasGrotesk_Medium.ttf') format('truetype');
+}
+
+.font-nhaasgrotesk {
+  font-family: 'NHaasGrotesk', sans-serif;
+}
+
+@font-face {
+  font-family: 'NHaasGroteskBold';
+  src: url('../../../assets/game/fonts/NHaasGrotesk_Bold.ttf') format('truetype');
+}
+
+.font-nhaasgrotesk-bold {
+  font-family: 'NHaasGroteskBold', sans-serif;
+}
+
+@font-face {
+  font-family: 'NHaasGroteskLight';
+  src: url('../../../assets/game/fonts/NHaasGrotesk_Light.ttf') format('truetype');
+}
+
+.font-nhaasgrotesk-light {
+  font-family: 'NHaasGroteskLight', sans-serif;
+}
+
+@font-face {
+  font-family: 'Norman';
+  src: url('../../../assets/game/fonts/Norman Regular.ttf') format('truetype');
+  font-weight: 900;
+}
+
+.font-norman {
+  font-family: 'Norman', sans-serif;
+}
+
+@font-face {
+  font-family: 'Norman-Italic';
+  src: url('../../../assets/game/fonts/Norman Regular.ttf') format('truetype');
+  font-weight: 900;
+  font-style: italic;
+}
+
+.font-norman-italic {
+  font-family: 'Norman-Italic', sans-serif;
+}
+
+@font-face {
+  font-family: 'NeueHaas Grotesk Display';
+  src: url('../../../assets/game/fonts/NHaasGrotesk_Light.ttf') format('truetype');
+  font-weight: 200;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'NeueHaas Grotesk Display';
+  src: url('../../../assets/game/fonts/NHaasGrotesk_Medium.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'NeueHaas Grotesk Display';
+  src: url('../../../assets/game/fonts/NHaasGrotesk_Bold.ttf') format('truetype');
+  font-weight: 800;
+  font-style: normal;
+}
+
+
+
+canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+#GAME {
+  .three-container {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.abs-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.glassmorphism {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  padding: 10px 20px;
+}
+
+.infoSection span {
+  color: black;
+}
+
+.textBackground {
+  background-image: url('../../../assets/game/images/textureMonet.png');
+  background-position: center;
+  background-clip: text;
+  color: transparent;
+  font-weight: 900;
+}
