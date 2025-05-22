@@ -27,11 +27,11 @@ export class MainInitCommand extends InitCommandBase {
 
 
     public override async initCommon(): Promise<void> {
-        ThreeAssetsManager.AddTexture(AssetId.IMAGE_ONE, this._getAssetPath('images/chanel.png'));
-        ThreeAssetsManager.AddTexture(AssetId.IMAGE_TWO, this._getAssetPath('images/orangerie.png'));
-        ThreeAssetsManager.AddTexture(AssetId.IMAGE_THREE, this._getAssetPath('images/orangerie.png'));
-        ThreeAssetsManager.AddTexture(AssetId.IMAGE_FOUR, this._getAssetPath('images/image1.jpg'));
-        ThreeAssetsManager.AddTexture(AssetId.IMAGE_FIVE, this._getAssetPath('images/orangerie2.png'));
+        ThreeAssetsManager.AddTexture(AssetId.IMAGE_ONE, this._getAssetPath('images/img1.png'));
+        ThreeAssetsManager.AddTexture(AssetId.IMAGE_TWO, this._getAssetPath('images/img2.png'));
+        ThreeAssetsManager.AddTexture(AssetId.IMAGE_THREE, this._getAssetPath('images/img3.png'));
+        ThreeAssetsManager.AddTexture(AssetId.IMAGE_FOUR, this._getAssetPath('images/img4.png'));
+        ThreeAssetsManager.AddTexture(AssetId.IMAGE_FIVE, this._getAssetPath('images/img0.png'));
         ThreeAssetsManager.AddTexture(AssetId.IMAGE_SIX, this._getAssetPath('images/image1.jpg'));
         ThreeAssetsManager.AddTexture(AssetId.IMAGE_SEVEN, this._getAssetPath('images/kaskad.png'));
         ThreeAssetsManager.AddTexture(AssetId.IMAGE_EIGHT, this._getAssetPath('images/orangerie.png'));
@@ -44,6 +44,7 @@ export class MainInitCommand extends InitCommandBase {
 
     public override async initThree(): Promise<void> {
         ThreeAssetsManager.AddRGBE(AssetId.HDR_STUDIO, this._getAssetPath('hdr/studio.hdr'));
+        ThreeAssetsManager.AddTexture(AssetId.TEXTURE_BAKE_MOUNTAIN, this._getAssetPath('textures/commons/mountainBake.png'));
 
     }
 

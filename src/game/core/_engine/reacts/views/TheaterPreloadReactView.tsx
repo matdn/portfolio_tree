@@ -165,8 +165,8 @@ const TheaterPreloadReactView = memo(({ ...props }: TransitionProps) => {
 
         <div className='absolute max-w-full inset-0 flex items-center justify-center'>
           <span className='text-black flex items-center font-neue  max-w-full text-8xl'>
-            <NumberFlow willChange={true} value={displayPercent} />
-            <span className='ml-1'>%</span>
+            <NumberFlow willChange={true} value={displayPercent} className="w-[30dvw] text-right" />
+            <span className='ml-1 '>%</span>
           </span>
         </div>
 

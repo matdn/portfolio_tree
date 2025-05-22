@@ -28,11 +28,11 @@ export default class MainThreeView extends WithoutTransitionThreeView {
     private _lenis: Lenis;
     private _backLight = new PointLight(0xffffff, 0);
     private _projectTextures = [
-        ThreeAssetsManager.GetTexture(AssetId.IMAGE_THREE),
-        ThreeAssetsManager.GetTexture(AssetId.IMAGE_THREE),
-        ThreeAssetsManager.GetTexture(AssetId.IMAGE_THREE),
-        ThreeAssetsManager.GetTexture(AssetId.IMAGE_THREE),
-        ThreeAssetsManager.GetTexture(AssetId.IMAGE_THREE),
+        ThreeAssetsManager.GetTexture(AssetId.IMAGE_FIVE),
+        ThreeAssetsManager.GetTexture(AssetId.IMAGE_ONE),
+        ThreeAssetsManager.GetTexture(AssetId.IMAGE_TWO),
+        ThreeAssetsManager.GetTexture(AssetId.IMAGE_FIVE),
+        ThreeAssetsManager.GetTexture(AssetId.IMAGE_FOUR),
         ThreeAssetsManager.GetTexture(AssetId.IMAGE_THREE),
         ThreeAssetsManager.GetTexture(AssetId.IMAGE_THREE),
         ThreeAssetsManager.GetTexture(AssetId.IMAGE_THREE),
@@ -53,7 +53,7 @@ export default class MainThreeView extends WithoutTransitionThreeView {
         this._mirror = new Reflector(
             new PlaneGeometry(200, 200),
             {
-                clipBias: 0.003,
+                clipBias: 0.000003,
                 textureWidth: window.innerWidth * 2,
                 textureHeight: window.innerHeight * 2,
                 color: 0x777777,
@@ -61,7 +61,6 @@ export default class MainThreeView extends WithoutTransitionThreeView {
             }
 
         );
-
         this._water = new Water(new PlaneGeometry(200, 200), {});
 
         this._mirror.position.set(0, -15, 0);
@@ -73,68 +72,11 @@ export default class MainThreeView extends WithoutTransitionThreeView {
             randoms[i] = Math.random();
         }
         waveGeometry.setAttribute('aRandom', new BufferAttribute(randoms, 1));
-        const waveMaterial = new ShaderMaterial({
-            transparent: true,
-            side: DoubleSide,
-            uniforms: {
-                uTime: { value: 0 },
-                uAmplitude: { value: 0.5 },
-                uFrequency: { value: 4.0 },
-                uSpeed: { value: 1.0 },
-            },
-            vertexShader: `
-               uniform float uTime;
-                uniform float uAmplitude;
-                uniform float uFrequency;
-                uniform float uSpeed;
 
-                attribute float aRandom;
 
-                varying vec2 vUv;
-                varying float vHeight;
-
-                float smoothWave(vec2 p, float time, float scale, float speed, float offset) {
-                    return sin(dot(p, vec2(scale, scale)) + time * speed + offset) * 0.5 +
-                        cos(dot(p, vec2(scale * 0.5, scale * 1.3)) + time * speed * 0.7 + offset) * 0.3;
-                }
-
-                void main() {
-                    vUv = uv;
-                    vec3 pos = position;
-
-                    vec2 p = pos.xy + aRandom * 10.0;
-
-                    float wave = smoothWave(p, uTime, uFrequency, uSpeed, aRandom * 5.0);
-
-                    pos.z += wave * uAmplitude;
-
-                    vHeight = pos.z;
-
-                    gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
-                }
-            `,
-            fragmentShader: `
-                varying vec2 vUv;
-                varying float vHeight;
-
-                void main() {
-                    float baseAlpha = 0.02;
-
-                    float glow = smoothstep(0.4, 0.7, vHeight);
-                    vec3 color = mix(vec3(1.0), vec3(1.5), glow);
-
-                    gl_FragColor = vec4(color, baseAlpha + glow * 0.1);
-                }
-                `,
-        });
-
-        const waveMesh = new Mesh(waveGeometry, waveMaterial);
-        waveMesh.rotation.x = -Math.PI / 2;
-        waveMesh.position.y = -14.99; // Juste au-dessus du miroir
         // this.add(waveMesh);
 
         // stocker dans la classe si tu veux y accéder dans update()
-        (this as any)._waveMaterial = waveMaterial;
         this._scene.traverse((child) => {
             if (child.name === Object3DId.PROJECTS) {
                 child.children.forEach((mesh, index) => {
@@ -147,20 +89,32 @@ export default class MainThreeView extends WithoutTransitionThreeView {
                     }
                 });
             }
+            // if (child.name === Object3DId.MOUNTAIN) {
+            //     if (child instanceof Mesh) {
+            //         child.material = new MeshStandardMaterial({
+            //             map: ThreeAssetsManager.GetTexture(AssetId.TEXTURE_BAKE_MOUNTAIN),
+            //             envMapIntensity: 1,
+            //             metalness: 0,
+            //         });
+            //     }
+
+            // }
             if (child.name === Object3DId.SCREENS) {
                 for (let i = 0; i < child.children.length; i++) {
 
                     const mesh = child.children[i] as Mesh;
-                    const light = new PointLight(0xff0000, 100);
+                    const light = new PointLight(0xffffff, 100);
                     // light.position.set(mesh.position.x, mesh.position.y, mesh.position.z);
                     // light.position.y += 1;
                     // this.add(new PointLightHelper(light, 1));
                     // this.add(light);
                     mesh.material = new MeshStandardMaterial({
-                        color: 0xeeeeee,
-                        metalness: 0.9,
-                        roughness: 0.8,
-                        envMapIntensity: 0,
+                        color: 0x000000,
+                        metalness: 1,
+                        roughness: 1,
+                        envMapIntensity: 1,
+                        emissive: 0x000000,
+                        emissiveIntensity: 1,
                     });
                 }
             }
@@ -217,7 +171,7 @@ export default class MainThreeView extends WithoutTransitionThreeView {
     public override update(dt: number): void {
         super.update(dt);
         this._lenis.raf(performance.now());
-        this._backLight.power = (this._scrollProgress * 30) * 1000;
+        this._backLight.power = (this._scrollProgress * 30) * 3000;
         if (this._light.decay > 2) this._light.decay -= 0.02;
         if (this._light.distance < 100) this._light.distance += 0.1;
         if (this._cameraPositions.length < 2) return;

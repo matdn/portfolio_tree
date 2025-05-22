@@ -26,6 +26,7 @@ export default {
       fontFamily: {
         sans: ['Inter var', ...defaultTheme.fontFamily.sans],
         norman: ['Norman'],
+        mabry: ['Mabry'],
         neue: ['NeueHaas Grotesk Display']
       },
     },

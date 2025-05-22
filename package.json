@@ -52,6 +52,7 @@
     "clsx": "^2.1.1",
     "framer-motion": "^11.3.30",
     "fs-extra": "^11.2.0",
+    "gsap": "^3.13.0",
     "hover-effect": "^1.2.1",
     "howler": "^2.2.4",
     "lottie-web": "^5.12.2",

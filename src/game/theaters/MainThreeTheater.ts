@@ -21,10 +21,10 @@ export class MainTheater extends ThreeTheaterBase {
         this._cameraId = CameraId.MAIN;
         // this._threePostProcessingId = PostProcessingId.LEO;
 
-        // this._environment = {
-        //     background: 0x000000,
-        //     environmentMapId: AssetId.HDR_STUDIO,
-        // };
+        this._environment = {
+            background: 0x000000,
+            environmentMapId: null,
+        };
 
     }
 

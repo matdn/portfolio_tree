@@ -140,7 +140,7 @@ const MainReactView: React.FC<TransitionProps> = (props) => {
 
         {/* Description en bas gauche */}
         <div className="mb-10">
-          <p className="text-ml mb-8 leading-relaxed max-w-3xl opacity-70">
+          <p className="text-ml mb-8 leading-relaxed max-w-[20vw] opacity-70">
             {breakpoints[activeIndex].description}
           </p>
 

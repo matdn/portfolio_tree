@@ -41,9 +41,9 @@ const EntryReactView: React.FC<TransitionProps> = (props) => {
                             animate={{ opacity: 1, filter: "blur(0px)" }}
                             exit={{ opacity: 0, filter: "blur(10px)" }}
                             transition={{ duration: 1.2, ease: "easeInOut" }}
-                            className="text-[5rem] leading-[0.5] font-norman font-italic md:text-[12rem] tracking-wide"
+                            className="text-[2rem] leading-[0.5] font-mabry uppercase font-italic md:text-[6rem] tracking-wide"
                         >
-                            Portefolio <br />
+                            Portfolio <br />
                         </motion.h1>
                     )}
                 </AnimatePresence>
