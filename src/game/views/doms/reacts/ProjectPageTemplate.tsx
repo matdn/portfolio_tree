@@ -15,13 +15,10 @@ const images = [
 ];
 
 const ProjectHeroSection = () => {
-    // État pour suivre l’image courante affichée dans l’animation
     const [currentImage, setCurrentImage] = useState(0);
 
-    // État qui déclenche l’apparition du texte "L’ORANGERIE"
     const [showText, setShowText] = useState(false);
 
-    // Refs pour les animations GSAP
     const textRef = useRef<HTMLHeadingElement>(null);
     const imageRef = useRef<HTMLDivElement>(null);
     const sideTextRef = useRef<HTMLDivElement>(null);
@@ -30,26 +27,22 @@ const ProjectHeroSection = () => {
     const gridRef = useRef<HTMLDivElement>(null);
     const gridImagesRef = useRef<(HTMLImageElement | null)[]>([]);
 
-    // Force le scroll en haut au chargement
     useEffect(() => {
         window.scrollTo({ top: 0, behavior: "auto" });
     }, []);
 
-    // 🌀 Animation d’intro : changement rapide d’image sticky avec fade
     useEffect(() => {
         const frameDuration = 150;
         let frameIndex = 0;
         let timeout: NodeJS.Timeout;
 
         const animateFrames = () => {
-            // Fade out rapide
             gsap.to(imageRef.current, {
                 opacity: 0,
                 duration: 0.1,
                 onComplete: () => {
-                    setCurrentImage(frameIndex); // Changement d’image
+                    setCurrentImage(frameIndex);
 
-                    // Fade in rapide
                     gsap.to(imageRef.current, {
                         opacity: 1,
                         duration: 0.1,
@@ -70,7 +63,6 @@ const ProjectHeroSection = () => {
         return () => clearTimeout(timeout);
     }, []);
 
-    // ✨ Animation GSAP du titre "L’ORANGERIE"
     useEffect(() => {
         if (showText && textRef.current) {
             gsap.fromTo(
@@ -81,7 +73,6 @@ const ProjectHeroSection = () => {
         }
     }, [showText]);
 
-    // ✨ Animation GSAP des paragraphes latéraux
     useEffect(() => {
         if (sideTextRef.current && leftTextRef.current && rightTextRef.current) {
             gsap.fromTo(
@@ -131,7 +122,7 @@ const ProjectHeroSection = () => {
                     stagger: 0.15,
                     scrollTrigger: {
                         trigger: gridRef.current,
-                        start: "center center", // 🔧 modifie ici le déclenchement
+                        start: "center center",
                         end: "bottom center",
                         toggleActions: "play none none reverse",
                         markers: true,
@@ -141,7 +132,6 @@ const ProjectHeroSection = () => {
         }
     }, []);
 
-    // 🔄 Correction de layout au chargement pour ScrollTrigger
     useEffect(() => {
         const timeout = setTimeout(() => {
             ScrollTrigger.refresh();
@@ -159,7 +149,6 @@ const ProjectHeroSection = () => {
         <>
             <section className="relative w-full bg-white min-h-[300vh]">
 
-                {/* Titre principal (affiché après l’animation d’intro) */}
                 <div className="h-[100dvh] flex items-center justify-center">
                     {showText && (
                         <h1
@@ -171,7 +160,6 @@ const ProjectHeroSection = () => {
                     )}
                 </div>
 
-                {/* Infos haut gauche & droite */}
                 <div className="absolute top-6 left-6 text-sm text-black font-light z-30">
                     Musée de l’Orangerie
                 </div>
@@ -179,7 +167,6 @@ const ProjectHeroSection = () => {
                     ©2025
                 </div>
 
-                {/* Image sticky animée */}
                 <div
                     ref={imageRef}
                     className="fixed top-1/2 -translate-y-1/2 w-full flex justify-center items-center z-10"
@@ -194,7 +181,6 @@ const ProjectHeroSection = () => {
                     />
                 </div>
 
-                {/* Texte latéral */}
                 <div
                     ref={sideTextRef}
                     className="flex justify-around items-center h-[100dvh] font-mabry text-[2dvh]"
@@ -217,11 +203,10 @@ const ProjectHeroSection = () => {
                     </p>
                 </div>
 
-                {/* Grille d’images */}
                 <div ref={gridRef} className="grid grid-cols-3 gap-12 h-[100dvh]">
                     {[...Array(9)].map((_, index) =>
                         index === 4 ? (
-                            <div key={index} /> // Laisse le centre vide
+                            <div key={index} />
                         ) : (
                             <div
                                 key={index}

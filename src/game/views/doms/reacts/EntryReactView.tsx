@@ -4,7 +4,7 @@ import ReactViewBase, { TransitionProps } from "../../../core/_engine/reacts/vie
 import Header from "../../../../components/Header";
 import Footer from "../../../../components/Footer";
 import Button from "./components/Button";
-import { ViewsManager } from "pancake";
+import { ViewsManager, ViewsProxy } from "pancake";
 import { ViewId } from "../../../constants/views/ViewId";
 
 const EntryReactView: React.FC<TransitionProps> = (props) => {
@@ -15,12 +15,13 @@ const EntryReactView: React.FC<TransitionProps> = (props) => {
         setTimeout(() => {
             ViewsManager.HideById(ViewId.ENTRY_REACT);
         }, 1600);
+        ViewsManager.ShowById(ViewId.MAIN_REACT);
+        const mainView = ViewsProxy.GetView(ViewId.THREE_MAIN) as any;
+        mainView.setLockCameraOnScroll(false);
     };
 
     return (
         <ReactViewBase {...props} className="w-screen fixed min-h-[100dvh] min-w-[100dvw] top-0 left-0 inset-0 text-white overflow-hidden">
-
-            {/* FOND ANIMÉ */}
             <motion.div
                 className="absolute inset-0 z-0"
                 initial={{ opacity: 1 }}

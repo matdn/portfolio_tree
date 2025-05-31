@@ -12,6 +12,7 @@ import MainReactView from '../../../views/doms/reacts/MainReactView';
 import OrangerieProjectPage from '../../../views/doms/reacts/ProjectPageTemplate';
 import EntryReactView from '../../../views/doms/reacts/EntryReactView';
 import ProjectPage from '../../../views/doms/reacts/ProjectPageTemplate';
+import AboutReactView from '../../../views/doms/reacts/AboutReactView';
 
 
 export class MainInitCommand extends InitCommandBase {
@@ -36,6 +37,7 @@ export class MainInitCommand extends InitCommandBase {
         ThreeAssetsManager.AddTexture(AssetId.IMAGE_SEVEN, this._getAssetPath('images/kaskad.png'));
         ThreeAssetsManager.AddTexture(AssetId.IMAGE_EIGHT, this._getAssetPath('images/orangerie.png'));
         ThreeAssetsManager.AddTexture(AssetId.IMAGE_NINE, this._getAssetPath('images/orangerie2.png'));
+        ThreeAssetsManager.AddTexture(AssetId.IMAGE_DUDV, this._getAssetPath('images/waterdudv.jpg'));
     }
 
     public override async initPixi(): Promise<void> {
@@ -53,6 +55,7 @@ export class MainInitCommand extends InitCommandBase {
         ViewsProxy.AddView(new ReactHTMLView(ViewId.MAIN_REACT, ViewPlacementId.REACT_VIEWS, MainReactView, 0));
         ViewsProxy.AddView(new ReactHTMLView(ViewId.ENTRY_REACT, ViewPlacementId.REACT_ENTRY, EntryReactView, 0));
         ViewsProxy.AddView(new ReactHTMLView(ViewId.PROJECT_REACT, ViewPlacementId.REACT_VIEWS, ProjectPage, 0));
+        ViewsProxy.AddView(new ReactHTMLView(ViewId.ABOUT_REACT, ViewPlacementId.REACT_VIEWS, AboutReactView, 0));
 
 
     }

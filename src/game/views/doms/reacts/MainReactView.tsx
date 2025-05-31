@@ -1,26 +1,60 @@
-import React, { useEffect, useState, useRef } from "react";
-import ReactViewBase, { TransitionProps } from "../../../core/_engine/reacts/views/bases/ReactViewBase";
-import { ViewId } from "../../../constants/views/ViewId";
-import { ViewsManager, ViewsProxy } from "pancake";
 import gsap from "gsap";
+import { ViewsManager, ViewsProxy } from "pancake";
+import React, { useEffect, useRef, useState } from "react";
+import { Vector3 } from "three";
+import { ViewId } from "../../../constants/views/ViewId";
+import ReactViewBase, { TransitionProps } from "../../../core/_engine/reacts/views/bases/ReactViewBase";
+import MainThreeView from "../../threes/MainThreeView";
 import Button from "./components/Button";
 
-// 🔹 Handler exporté pour la vue Three
 export let handleCameraIndexChange: ((index: number) => void) | null = null;
 
 
 const breakpoints = [
   { title: "", description: "" },
-  { title: "Musée <span class='font-bold'>de l’Orangerie</span>", description: "Musée de l’Orangerie – Expérience interactive 3D Une exploration immersive autour de l’univers de Monet et de l’architecture du musée de l’Orangerie. Ce projet mêle narration interactive, animation au scroll, shaders inspirés des Nymphéas et modélisation 3D avec Blender et Three.js. L’objectif : créer une expérience web sensible et fluide, entre technique et poésie visuelle." },
-  { title: "Musée <span class='font-bold'>de l’Orangerie</span>", description: "Musée de l’Orangerie – Expérience interactive 3D Une exploration immersive autour de l’univers de Monet et de l’architecture du musée de l’Orangerie. Ce projet mêle narration interactive, animation au scroll, shaders inspirés des Nymphéas et modélisation 3D avec Blender et Three.js. L’objectif : créer une expérience web sensible et fluide, entre technique et poésie visuelle." },
-  { title: "Musée <span class='font-bold'>de l’Orangerie</span>", description: "Musée de l’Orangerie – Expérience interactive 3D Une exploration immersive autour de l’univers de Monet et de l’architecture du musée de l’Orangerie. Ce projet mêle narration interactive, animation au scroll, shaders inspirés des Nymphéas et modélisation 3D avec Blender et Three.js. L’objectif : créer une expérience web sensible et fluide, entre technique et poésie visuelle." },
-  { title: "Musée <span class='font-bold'>de l’Orangerie</span>", description: "Musée de l’Orangerie – Expérience interactive 3D Une exploration immersive autour de l’univers de Monet et de l’architecture du musée de l’Orangerie. Ce projet mêle narration interactive, animation au scroll, shaders inspirés des Nymphéas et modélisation 3D avec Blender et Three.js. L’objectif : créer une expérience web sensible et fluide, entre technique et poésie visuelle." },
-  { title: "Musée <span class='font-bold'>de l’Orangerie</span>", description: "Musée de l’Orangerie – Expérience interactive 3D Une exploration immersive autour de l’univers de Monet et de l’architecture du musée de l’Orangerie. Ce projet mêle narration interactive, animation au scroll, shaders inspirés des Nymphéas et modélisation 3D avec Blender et Three.js. L’objectif : créer une expérience web sensible et fluide, entre technique et poésie visuelle." },
-  { title: "Musée <span class='font-bold'>de l’Orangerie</span>", description: "Musée de l’Orangerie – Expérience interactive 3D Une exploration immersive autour de l’univers de Monet et de l’architecture du musée de l’Orangerie. Ce projet mêle narration interactive, animation au scroll, shaders inspirés des Nymphéas et modélisation 3D avec Blender et Three.js. L’objectif : créer une expérience web sensible et fluide, entre technique et poésie visuelle." },
-  { title: "Musée <span class='font-bold'>de l’Orangerie</span>", description: "Musée de l’Orangerie – Expérience interactive 3D Une exploration immersive autour de l’univers de Monet et de l’architecture du musée de l’Orangerie. Ce projet mêle narration interactive, animation au scroll, shaders inspirés des Nymphéas et modélisation 3D avec Blender et Three.js. L’objectif : créer une expérience web sensible et fluide, entre technique et poésie visuelle." },
-  { title: "Musée <span class='font-bold'>de l’Orangerie</span>", description: "Musée de l’Orangerie – Expérience interactive 3D Une exploration immersive autour de l’univers de Monet et de l’architecture du musée de l’Orangerie. Ce projet mêle narration interactive, animation au scroll, shaders inspirés des Nymphéas et modélisation 3D avec Blender et Three.js. L’objectif : créer une expérience web sensible et fluide, entre technique et poésie visuelle." },
+  {
+    title: "Musée <span class='font-bold'>de l’Orangerie</span>",
+    description: "Une expérience interactive en 3D inspirée des Nymphéas de Monet. Conçue pour plonger l'utilisateur dans l’univers poétique du musée, à travers shaders, animations synchronisées au scroll, et modélisation immersive.",
+    disabled: false
+  },
+  {
+    title: "Portfolio <span class='font-bold'>Zoé Michel</span>",
+    description: "Un portfolio digital raffiné pour une directrice artistique. Navigation fluide, typographie élégante et animations subtiles pour refléter une identité créative forte.",
+    disabled: false
+  },
+  {
+    title: "Web App <span class='font-bold'>Kascad</span>",
+    description: "Plateforme dédiée à la mise en relation entre sponsors et athlètes extrêmes. Architecture pensée pour l'évolutivité, interface claire et API robuste en backend Python.",
+    disabled: false
+  },
+  {
+    title: "Landing Page <span class='font-bold'>Kadija Bio</span>",
+    description: "Site vitrine pour une cheffe à domicile, spécialisée en cuisine bio. Design naturel, storytelling visuel et intégration CMS pour gestion des menus et commandes.",
+    disabled: false
+  },
+  {
+    title: "Website<span class='font-bold'> Emraude</span>",
+    description: "Site de présentation pour l’agence de jeux immersifs Emraude Escape. Design contemporain, interaction ludique, back-office CMS Storyblok customisé.",
+    disabled: false
+  },
+  {
+    title: "<span class='font-bold'>Chanel</span>",
+    description: "Prototype de mini-site événementiel pour la maison Chanel. Allie luxe visuel, animations GSAP soignées et navigation immersive sur mesure.",
+    disabled: true
+  },
+  {
+    title: "Projet <span class='font-bold'>mystère</span>",
+    description: "Un projet artistique en préparation… Fusion d’interaction sensorielle et de technologie visuelle. Plus d’infos bientôt.",
+    disabled: true
+  },
+  {
+    title: "Projet <span class='font-bold'>expérimental</span>",
+    description: "Exploration autour de la physique des fluides et du motion design WebGL. Encore en phase de R&D.",
+    disabled: true
+  },
   { title: "", description: "" },
 ];
+
 
 const lerp = (start: number, end: number, t: number) => start * (1 - t) + end * t;
 
@@ -51,6 +85,17 @@ const MainReactView: React.FC<TransitionProps> = (props) => {
     ViewsManager.HideById(ViewId.MAIN_REACT);
     ViewsManager.HideById(ViewId.THREE_MAIN);
     ViewsManager.ShowById(ViewId.PROJECT_REACT);
+  };
+
+  const aboutCall = () => {
+    const mainView = ViewsProxy.GetView(ViewId.THREE_MAIN) as MainThreeView;
+    ViewsManager.HideById(ViewId.MAIN_REACT);
+    setTimeout(() => {
+      ViewsManager.ShowById(ViewId.ABOUT_REACT);
+    }, 1000);
+    const aboutPos = new Vector3(0, 0, 0);
+    const aboutTarget = new Vector3(0, 0, 0);
+    mainView.rotateCameraYBy(aboutPos, aboutTarget, 2.5);
   };
 
   useEffect(() => {
@@ -118,9 +163,8 @@ const MainReactView: React.FC<TransitionProps> = (props) => {
   return (
     <ReactViewBase
       {...props}
-      className="w-screen min-h-[900dvh] relative flex flex-col justify-center items-start"
+      className={`w-screen min-h-[900dvh] relative flex flex-col justify-center items-start`}
     >
-
       <div className="fixed right-12 top-1/4 h-[50vh] w-[2px] bg-black">
         <div ref={progressRef} className="w-full bg-white h-0" />
       </div>
@@ -130,7 +174,12 @@ const MainReactView: React.FC<TransitionProps> = (props) => {
       >
         {/* Titre haut gauche */}
         <div className="overflow-hidden h-[6rem]">
-          <div className="fixed top-8 right-10 text-sm text-white opacity-60 z-20">©2025</div>
+          <div className="flex fixed top-8 right-10 opacity-60 z-20 gap-8 items-center justify-center">
+            <div onClick={aboutCall}><p>about me</p></div>
+
+            <div className="text-sm text-white ">©2025</div>
+          </div>
+
           <span
             key={activeIndex}
             className="block text-4xl font-extralight leading-tight"
@@ -139,14 +188,18 @@ const MainReactView: React.FC<TransitionProps> = (props) => {
         </div>
 
         {/* Description en bas gauche */}
-        <div className="mb-10">
-          <p className="text-ml mb-8 leading-relaxed max-w-[20vw] opacity-70">
+        <div className="mb-10 h-full flex flex-col gap-8 justify-end">
+          <p className="text-base sm:text-sm md:text-md lg:text-lg xl:text-xl mb-8 leading-relaxed max-w-[50vw] md:max-w-[70vw] lg:max-w-[40vw] xl:max-w-[20vw] opacity-70 font-roboto transition-all duration-300 text-white">
+
             {breakpoints[activeIndex].description}
           </p>
 
           {activeIndex !== 0 && activeIndex !== breakpoints.length - 1 && (
-            <Button title={"Voir le projet"} onClick={() => handleOpenProject("monet_orangerie")} />
-
+            breakpoints[activeIndex].disabled ? (
+              <p className="italic text-sm opacity-50">Projet en cours…</p>
+            ) : (
+              <Button title="Voir le projet" onClick={() => handleOpenProject("monet_orangerie")} className="w-fit" />
+            )
           )}
         </div>
       </div>

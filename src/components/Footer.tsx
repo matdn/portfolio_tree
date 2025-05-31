@@ -6,7 +6,7 @@ const Footer = () => {
     return (
         <footer className="absolute bottom-4 w-full px-6 flex justify-between text-sm z-10">
             <span>MATIS DENE</span>
-            <span className="text-sm font-neue md:text-[1rem] pb-8 font-light text-[#626262]">Mon portefolio est actuellement en cours développement</span>
+            <span className="text-sm text-center font-neue md:text-[1rem] pb-8 font-light text-[#626262]">Mon portfolio est en cours de développement</span>
 
             <button
                 onClick={() => setIsMuted(!isMuted)}

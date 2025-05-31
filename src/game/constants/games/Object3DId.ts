@@ -6,4 +6,5 @@ export enum Object3DId {
     SCREENS = AssetId.GLTF_MAIN + 'Screens',
     CAMERAS_POS = AssetId.GLTF_MAIN + 'CameraPos',
     MOUNTAIN = AssetId.GLTF_MAIN + 'Landscape',
+    SWEATER = AssetId.GLTF_MAIN + 'sweat',
 }

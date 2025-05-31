@@ -6,4 +6,5 @@ export enum ViewId {
     MAIN_REACT = 'MAIN_REACT',
     PROJECT_REACT = 'PROJECT_REACT',
     ENTRY_REACT = 'ENTRY_REACT',
+    ABOUT_REACT = 'ABOUT_REACT',
 }
