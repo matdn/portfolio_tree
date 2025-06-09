@@ -3,7 +3,7 @@
 import { ThreeAssetsManager } from "@cooker/three";
 import Lenis from '@studio-freight/lenis';
 import gsap from "gsap";
-import { BufferAttribute, Color, Euler, FrontSide, Mesh, MeshStandardMaterial, Object3D, PlaneGeometry, PointLight, PointLightHelper, RepeatWrapping, ShaderMaterial, Texture, Vector3 } from "three";
+import { BufferAttribute, Color, Euler, FrontSide, MathUtils, Mesh, MeshStandardMaterial, Object3D, PlaneGeometry, PointLight, PointLightHelper, Quaternion, RepeatWrapping, ShaderMaterial, Texture, Vector3 } from "three";
 import { Reflector } from "three/examples/jsm/objects/Reflector";
 import { Water } from 'three/examples/jsm/objects/Water';
 import { AssetId } from "../../constants/games/AssetId";
@@ -34,17 +34,19 @@ export default class MainThreeView extends WithoutTransitionThreeView {
     private _backLight = new PointLight(0xffffff, 0);
     private _cursorLight: PointLight | null = null;
     private _snowParticles: SnowParticles;
+    private _sweaterMesh: Mesh | null = null;
+    private _sweaterHasInteracted = false;
 
     private _projectTextures = [
-        ThreeAssetsManager.GetTexture(AssetId.IMAGE_FIVE),
+        ThreeAssetsManager.GetTexture(AssetId.IMAGE_SEVEN),
         ThreeAssetsManager.GetTexture(AssetId.IMAGE_ONE),
         ThreeAssetsManager.GetTexture(AssetId.IMAGE_TWO),
         ThreeAssetsManager.GetTexture(AssetId.IMAGE_FIVE),
         ThreeAssetsManager.GetTexture(AssetId.IMAGE_FOUR),
+        ThreeAssetsManager.GetTexture(AssetId.IMAGE_SIX),
         ThreeAssetsManager.GetTexture(AssetId.IMAGE_THREE),
-        ThreeAssetsManager.GetTexture(AssetId.IMAGE_THREE),
-        ThreeAssetsManager.GetTexture(AssetId.IMAGE_THREE),
-        ThreeAssetsManager.GetTexture(AssetId.IMAGE_THREE),
+        ThreeAssetsManager.GetTexture(AssetId.IMAGE_EIGHT),
+        ThreeAssetsManager.GetTexture(AssetId.IMAGE_NINE),
     ];
 
     private _previousCameraIndex: number = -1;
@@ -113,10 +115,10 @@ export default class MainThreeView extends WithoutTransitionThreeView {
         shader.uniforms.tDudv = { value: dudvMap };
         shader.uniforms.time = { value: 0 };
         shader.uniforms.waveStrength = { value: 0.5 };
-        shader.uniforms.waveSpeed = { value: 2. };
+        shader.uniforms.waveSpeed = { value: 0.05 };
         shader.uniforms.transmission = { value: 0.1 };
         shader.uniforms.color = { value: new Color(0x000000) };
-        shader.uniforms.dudvScale = { value: 0.4 };
+        shader.uniforms.dudvScale = { value: 0.01 };
         shader.uniforms.opacity = { value: 0.75 };
         this._mirror = new Reflector(new PlaneGeometry(800, 800), {
             clipBias: 0.003,
@@ -145,7 +147,7 @@ export default class MainThreeView extends WithoutTransitionThreeView {
 
         const fresnelMaterial = new ShaderMaterial({
             uniforms: {
-                fresnelBias: { value: 0.01 },
+                fresnelBias: { value: 0.1 },
                 fresnelScale: { value: 1.0 },
                 fresnelPower: { value: 2.0 },
                 edgeColor: { value: new Color(0xffffff) },
@@ -205,9 +207,8 @@ export default class MainThreeView extends WithoutTransitionThreeView {
                     this._sweaterLight.position.set(sweaterPos.x, sweaterPos.y + 0.5, sweaterPos.z);
                     this._sweaterLight.intensity = 1000;
                     this.add(this._sweaterLight);
-                    console.log(child.position);
+                    this._sweaterMesh = child;
                 }
-
             }
 
             if (child.name === Object3DId.SCREENS) {
@@ -273,6 +274,10 @@ export default class MainThreeView extends WithoutTransitionThreeView {
     }
 
     private handleMouseMove = (event: MouseEvent) => {
+        if (!this._sweaterHasInteracted) {
+            this._sweaterHasInteracted = true;
+            return;
+        }
         const mouseX = event.clientX / window.innerWidth;
         const mouseY = event.clientY / (window.innerHeight * 2);
 
@@ -289,8 +294,28 @@ export default class MainThreeView extends WithoutTransitionThreeView {
             this._cursorLight.position.lerp(targetPos, 0.5);
         }
 
-        console.log(`[cursor] screen: x=${event.clientX}, y=${event.clientY}`);
-        console.log(`[light] world: x=${targetX.toFixed(2)}, y=${targetY.toFixed(2)}, z=${targetZ}`);
+        if (this._sweaterMesh) {
+            const sweaterPos = this._sweaterMesh.position.clone();
+
+            // Distance entre le curseur et le sweat sur X
+            const deltaX = targetX - sweaterPos.x;
+
+            // Sensibilité et limite de rotation (en radians)
+            const sensitivity = 0.02;
+            const maxRotation = Math.PI / 6; // 30°
+
+            // Calcul de l'angle cible (attention au signe pour que le sweat ne parte pas à l'envers)
+            const targetRotationZ = MathUtils.clamp(-deltaX * sensitivity, -maxRotation, maxRotation);
+            const targetRotationY = MathUtils.clamp((targetY - sweaterPos.y) * sensitivity, -maxRotation, maxRotation);
+            // Appliquer la rotation de base pour corriger le sens initial si nécessaire
+            const baseOffset = Math.PI; // ← rotation de 180° si ton modèle est à l’envers
+            const finalTargetZ = targetRotationZ + baseOffset;
+            const finalTargetY = targetRotationY + baseOffset;
+
+            // Interpolation douce
+            this._sweaterMesh.rotation.z += (finalTargetZ - this._sweaterMesh.rotation.z) * 0.1;
+            // this._sweaterMesh.rotation.y += (finalTargetY - this._sweaterMesh.rotation.y) * 0.1;
+        }
     };
 
 

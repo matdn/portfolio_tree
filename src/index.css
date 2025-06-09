@@ -11,7 +11,9 @@
 @tailwind components;
 @tailwind utilities;
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -49,4 +51,77 @@
     display: none;
   }
 
+}
+
+button,
+a,
+[role="button"] {
+  cursor: none !important;
+}
+
+/* index.css */
+html,
+body,
+* {
+  cursor: none !important;
+
+}
+
+
+
+/* .custom-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 12px;
+  height: 12px;
+  background-color: white;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+  mix-blend-mode: difference;
+  pointer-events: none;
+}
+
+.custom-cursor::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: var(--ring-size, 0px);
+  height: var(--ring-size, 0px);
+  border-radius: 50%;
+  border: px solid white;
+  transform: translate(-50%, -50%);
+  transition: width 0.2s ease, height 0.2s ease;
+  mix-blend-mode: difference;
+  pointer-events: none;
+} */
+
+
+.custom-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 18px;
+  height: 18px;
+  background-color: white;
+  border-radius: 50%;
+  z-index: 9999;
+  mix-blend-mode: difference;
+  pointer-events: none;
+}
+
+.cursor-ring {
+  position: fixed;
+  width: var(--ring-size, 0px);
+  height: var(--ring-size, 0px);
+  border: 2px solid white;
+  border-radius: 50%;
+  top: 0;
+  left: 0;
+  mix-blend-mode: difference;
+  pointer-events: none;
+  z-index: 9998;
+  transition: width 0.2s ease, height 0.2s ease;
 }

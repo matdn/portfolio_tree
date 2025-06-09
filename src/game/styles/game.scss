@@ -4,6 +4,12 @@
 @import './view/components/buttons.scss';
 @import './view/galery.scss';
 
+body,
+* {
+  cursor: none !important;
+}
+
+
 @font-face {
   font-family: 'Instrument';
   src: url('../../../assets/game/fonts/InstrumentSerif-Regular.ttf') format('truetype');

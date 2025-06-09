@@ -13,6 +13,16 @@ import ReactHTMLView from './core/_engine/htmls/views/ReactHTMLView';
 export default function GameReact() {
   const [isInit, setIsInit] = useState<boolean>(GameMain.IsInit);
   const [views, setViews] = useState<React.ReactNode[]>([]);
+  useEffect(() => {
+    const style = document.createElement('style');
+    style.innerHTML = `
+      * { cursor: none !important; }
+    `;
+    document.head.appendChild(style);
+    return () => {
+      document.head.removeChild(style);
+    };
+  }, []);
 
   useEffect(() => {
     if (GameMain.IsInit) {
