@@ -91,8 +91,8 @@ const ProjectHeroSection = () => {
                         trigger: sideTextRef.current,
                         start: "top+=200 center", // 🔧 modifie ici le déclenchement
                         end: "bottom-=200 center",
-                        toggleActions: "play reverse play reverse",
-                        markers: true,
+                        toggleActions: "play reverse play reverse"
+                        // markers: true,
                     },
                 }
             );

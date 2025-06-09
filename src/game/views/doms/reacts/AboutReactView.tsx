@@ -1,4 +1,7 @@
+import { ViewsProxy } from "pancake";
 import React, { useEffect, useRef, useState } from "react";
+import { ViewId } from "../../../constants/views/ViewId";
+import MainThreeView from "../../threes/MainThreeView";
 import Button from "./components/Button";
 
 const AboutReactView: React.FC = () => {
@@ -8,13 +11,13 @@ const AboutReactView: React.FC = () => {
     useEffect(() => {
         const timeout = setTimeout(() => {
             setVisible(true);
-        }, 100); // petit délai pour éviter l'effet instantané
+        }, 100);
 
         return () => clearTimeout(timeout);
     }, []);
 
     const handleClick = () => {
-        console.log("Button clicked from AboutReactView");
+        ViewsProxy.GetView<MainThreeView>(ViewId.THREE_MAIN).resetCameraToInitialPosition();
     };
 
     return (

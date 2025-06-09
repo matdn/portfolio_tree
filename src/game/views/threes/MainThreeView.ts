@@ -318,10 +318,6 @@ export default class MainThreeView extends WithoutTransitionThreeView {
         }
     };
 
-
-
-
-
     public getLenis(): Lenis {
         return this._lenis;
     }
@@ -347,7 +343,6 @@ export default class MainThreeView extends WithoutTransitionThreeView {
 
     private animate() {
         if (!this._isAnimating) return;
-
         this._lenis.raf(performance.now());
         requestAnimationFrame(() => this.animate());
     }
@@ -365,6 +360,37 @@ export default class MainThreeView extends WithoutTransitionThreeView {
     public getCameraPositions() {
         return this._cameraPositions;
     }
+
+    public resetCameraToInitialPosition() {
+        if (this._cameraPositions.length === 0) return;
+
+        const initial = new Vector3(0, 0, 120);
+        this.setLockCameraOnScroll(true); // bloque les updates auto de la cam
+
+        // gsap.to(this._camera.camera.position, {
+        //     x: initial.x,
+        //     y: initial.y,
+        //     z: initial.z,
+        //     duration: 2,
+        //     ease: "power2.inOut",
+        // });
+
+        gsap.to(this._camera.camera.rotation, {
+            y: Math.PI,
+            duration: 2,
+            ease: "power2.inOut",
+            onComplete: () => {
+                this._isAboutPage = false;
+                this._cursorLight!.visible = false;
+                window.removeEventListener("mousemove", this.handleMouseMove);
+
+                ViewsManager.HideById(ViewId.ABOUT_REACT);
+                ViewsManager.ShowById(ViewId.MAIN_REACT);
+                this.setLockCameraOnScroll(false); // réactive scroll-cam
+            }
+        });
+    }
+
 
     public override update(dt: number): void {
         super.update(dt);
