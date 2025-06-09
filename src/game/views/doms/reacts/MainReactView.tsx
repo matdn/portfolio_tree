@@ -21,22 +21,22 @@ const breakpoints = [
   {
     title: "Portfolio <span class='font-bold'>Zoé Michel</span>",
     description: "Un portfolio digital raffiné pour une directrice artistique. Navigation fluide, typographie élégante et animations subtiles pour refléter une identité créative forte.",
-    disabled: false
+    disabled: true
   },
   {
     title: "Web App <span class='font-bold'>Kascad</span>",
     description: "Plateforme dédiée à la mise en relation entre sponsors et athlètes extrêmes. Architecture pensée pour l'évolutivité, interface claire et API robuste en backend Python.",
-    disabled: false
+    disabled: true
   },
   {
     title: "Landing Page <span class='font-bold'>Kadija Bio</span>",
     description: "Site vitrine pour une cheffe à domicile, spécialisée en cuisine bio. Design naturel, storytelling visuel et intégration CMS pour gestion des menus et commandes.",
-    disabled: false
+    disabled: true
   },
   {
     title: "Website<span class='font-bold'> Emraude</span>",
     description: "Site de présentation pour l’agence de jeux immersifs Emraude Escape. Design contemporain, interaction ludique, back-office CMS Storyblok customisé.",
-    disabled: false
+    disabled: true
   },
   {
     title: "<span class='font-bold'>Chanel</span>",
