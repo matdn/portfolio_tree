@@ -5,6 +5,7 @@ export enum AssetId {
     // 3D models
     GLTF_MAIN = 'GLTF_MAIN',
     GLTF_COMMON = 'GLTF_COMMON',
+    GLTF_CINEMA = 'GLTF_CINEMA',
 
 
     IMAGE_ONE = 'IMAGE_ONE',
@@ -19,4 +20,5 @@ export enum AssetId {
     TEXTURE_BAKE_MOUNTAIN = 'TEXTURE_BAKE_MOUNTAIN',
     IMAGE_DUDV = 'IMAGE_DUDV',
     HDR_STUDIO = 'HDR_STUDIO',
+    TEXT_BLUR = 'TEXT_BLUR',
 }

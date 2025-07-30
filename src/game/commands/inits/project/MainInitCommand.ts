@@ -1,4 +1,4 @@
-import { ViewsProxy } from 'pancake';
+import { TheatersProxy, ViewsProxy } from 'pancake';
 import { ViewId } from '../../../constants/views/ViewId';
 import InitCommandBase from "../../../core/commands/inits/initcommands/bases/InitCommandBase";
 import MainThreeView from "../../../views/threes/MainThreeView";
@@ -13,12 +13,17 @@ import OrangerieProjectPage from '../../../views/doms/reacts/ProjectPageTemplate
 import EntryReactView from '../../../views/doms/reacts/EntryReactView';
 import ProjectPage from '../../../views/doms/reacts/ProjectPageTemplate';
 import AboutReactView from '../../../views/doms/reacts/AboutReactView';
+import TestReactView from '../../../views/doms/reacts/TestReactView';
+import TestThreeView from '../../../views/threes/TestThreeView';
+import CinemaThreeView from '../../../views/threes/CinemaThreeView';
+import { CinemaCameraController } from '../../../cameras/CinemaCameraController';
 
 
 export class MainInitCommand extends InitCommandBase {
 
     public override async initProxies(): Promise<void> {
         ThreeCamerasProxy.AddCamera(new MainCameraController());
+        ThreeCamerasProxy.AddCamera(new CinemaCameraController());
 
     }
 
@@ -38,6 +43,7 @@ export class MainInitCommand extends InitCommandBase {
         ThreeAssetsManager.AddTexture(AssetId.IMAGE_EIGHT, this._getAssetPath('images/kascad1.png'));
         ThreeAssetsManager.AddTexture(AssetId.IMAGE_NINE, this._getAssetPath('images/oblique1.png'));
         ThreeAssetsManager.AddTexture(AssetId.IMAGE_DUDV, this._getAssetPath('images/waterdudv.jpg'));
+        ThreeAssetsManager.AddTexture(AssetId.TEXT_BLUR, this._getAssetPath('images/black-blur-uniform-opacity 1.png'));
     }
 
     public override async initPixi(): Promise<void> {
@@ -52,16 +58,20 @@ export class MainInitCommand extends InitCommandBase {
 
     public override async addViews(): Promise<void> {
         ViewsProxy.AddViewConstructor(ViewId.THREE_MAIN, MainThreeView);
+        ViewsProxy.AddViewConstructor(ViewId.TEST_THREE, TestThreeView);
+        ViewsProxy.AddViewConstructor(ViewId.THREE_CINEMA, CinemaThreeView);
+
         ViewsProxy.AddView(new ReactHTMLView(ViewId.MAIN_REACT, ViewPlacementId.REACT_VIEWS, MainReactView, 0));
         ViewsProxy.AddView(new ReactHTMLView(ViewId.ENTRY_REACT, ViewPlacementId.REACT_ENTRY, EntryReactView, 0));
-        ViewsProxy.AddView(new ReactHTMLView(ViewId.PROJECT_REACT, ViewPlacementId.REACT_VIEWS, ProjectPage, 0));
+        // ViewsProxy.AddView(new ReactHTMLView(ViewId.PROJECT_REACT, ViewPlacementId.REACT_VIEWS, ProjectPage, 0));
+        ViewsProxy.AddView(new ReactHTMLView(ViewId.TEST_REACT, ViewPlacementId.REACT_VIEWS, TestReactView, 0));
+
         ViewsProxy.AddView(new ReactHTMLView(ViewId.ABOUT_REACT, ViewPlacementId.REACT_VIEWS, AboutReactView, 0));
 
 
     }
 
     public override async addTheaters(): Promise<void> {
-        // 
     }
 
 

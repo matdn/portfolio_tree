@@ -95,7 +95,7 @@ const Button = forwardRef<ButtonRef, ButtonProps>(
                 ref={buttonRef}
                 onClick={onClick}
                 className={clsx(
-                    'relative px-6 py-1.5 md:px-8 md:py-2 rounded-full border border-2 border-white bg-transparent md:bg-transparent flex items-center gap-4 text-white will-change-transform',
+                    'relative px-6 py-1.5 md:px-8 md:py-2 md:rounded-full md:border md:border-2 md:border-white underlign bg-transparent md:bg-transparent flex items-center gap-4 text-white will-change-transform',
                     className
                 )}
             >
@@ -110,7 +110,7 @@ const Button = forwardRef<ButtonRef, ButtonProps>(
                             >
                                 <span
                                     ref={(el) => (topLettersRef.current[index] = el)}
-                                    className='inline-block text-sm font-medium uppercase'
+                                    className='inline-block text-[0.5rem] md:text-sm font-medium uppercase'
                                 >
                                     {letter === ' ' ? '\u00A0' : letter}
                                 </span>
@@ -126,7 +126,7 @@ const Button = forwardRef<ButtonRef, ButtonProps>(
                             >
                                 <span
                                     ref={(el) => (bottomLettersRef.current[index] = el)}
-                                    className='inline-block text-sm font-medium uppercase'
+                                    className='inline-block text-[0.5rem] md:text-sm font-medium uppercase'
                                 >
                                     {letter === ' ' ? '\u00A0' : letter}
                                 </span>

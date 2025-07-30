@@ -125,3 +125,14 @@ body,
   z-index: 9998;
   transition: width 0.2s ease, height 0.2s ease;
 }
+
+#threejs-canvas {
+  /* L'ID ou la classe de votre élément canvas */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  /* Place le canvas derrière tout le contenu HTML */
+}

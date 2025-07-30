@@ -3,7 +3,7 @@
 import { ThreeAssetsManager } from "@cooker/three";
 import Lenis from '@studio-freight/lenis';
 import gsap from "gsap";
-import { BufferAttribute, Color, Euler, FrontSide, MathUtils, Mesh, MeshStandardMaterial, Object3D, PlaneGeometry, PointLight, PointLightHelper, Quaternion, RepeatWrapping, ShaderMaterial, Texture, Vector3 } from "three";
+import { BufferAttribute, Color, Euler, FrontSide, MathUtils, Mesh, MeshBasicMaterial, MeshStandardMaterial, Object3D, PlaneGeometry, PointLight, PointLightHelper, Quaternion, RepeatWrapping, ShaderMaterial, Texture, Vector3 } from "three";
 import { Reflector } from "three/examples/jsm/objects/Reflector";
 import { Water } from 'three/examples/jsm/objects/Water';
 import { AssetId } from "../../constants/games/AssetId";
@@ -114,9 +114,9 @@ export default class MainThreeView extends WithoutTransitionThreeView {
 
         shader.uniforms.tDudv = { value: dudvMap };
         shader.uniforms.time = { value: 0 };
-        shader.uniforms.waveStrength = { value: 0.5 };
+        shader.uniforms.waveStrength = { value: 0.7 };
         shader.uniforms.waveSpeed = { value: 0.05 };
-        shader.uniforms.transmission = { value: 0.1 };
+        shader.uniforms.transmission = { value: 0.2 };
         shader.uniforms.color = { value: new Color(0x000000) };
         shader.uniforms.dudvScale = { value: 0.01 };
         shader.uniforms.opacity = { value: 0.75 };
@@ -217,13 +217,10 @@ export default class MainThreeView extends WithoutTransitionThreeView {
                     const mesh = child.children[i] as Mesh;
                     const light = new PointLight(0xffffff, 100);
 
-                    mesh.material = new MeshStandardMaterial({
+                    mesh.material = new MeshBasicMaterial({
                         color: 0x000000,
-                        metalness: 1,
-                        roughness: 1,
-                        envMapIntensity: 1,
-                        emissive: 0x000000,
-                        emissiveIntensity: 1,
+                        // metalness: 1,
+                        // roughness: 0,
                     });
                 }
             }

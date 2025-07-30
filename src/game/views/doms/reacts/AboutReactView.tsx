@@ -23,7 +23,7 @@ const AboutReactView: React.FC = () => {
     return (
         <div
             ref={containerRef}
-            className={`fixed max-w-[50vw] bottom-0 left-1/2 flex flex-col items-center gap-[5rem] -translate-x-1/2 w-full z-50 pointer-events-auto transition-all duration-1200 ease-out ${visible ? "blur-0 opacity-100" : "blur-md opacity-0"
+            className={`md:fixed max-w-[50vw] bottom-0 left-1/2 flex flex-col items-center gap-[5rem] -translate-x-1/2 w-full z-50 pointer-events-auto transition-all duration-1200 ease-out ${visible ? "blur-0 opacity-100" : "blur-md opacity-0"
                 }`}
         >
             <div className="text-center px-8 pb-6 text-base sm:text-lg md:text-xl font-roboto font-light text-white opacity-50">

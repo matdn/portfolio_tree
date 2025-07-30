@@ -9,6 +9,7 @@ import InitCommandBase from "../../../core/commands/inits/initcommands/bases/Ini
 import { MainTheater } from "../../../theaters/MainThreeTheater";
 import { AnalyseGLTFCommand } from '../AnalyseGLTFCommand';
 import { ProjectThreeTheater } from '../../../theaters/ProjectThreeTheater';
+import CinemaThreeView from '../../../views/threes/CinemaThreeView';
 
 
 export class CommonProjectInitCommand extends InitCommandBase {
@@ -32,10 +33,12 @@ export class CommonProjectInitCommand extends InitCommandBase {
     public override async initThree(): Promise<void> {
         ThreeAssetsManager.AddModel(AssetId.GLTF_COMMON, this._getAssetPath('models/common.glb'));
         ThreeAssetsManager.AddModel(AssetId.GLTF_MAIN, this._getAssetPath('models/model.glb'));
+        ThreeAssetsManager.AddModel(AssetId.GLTF_CINEMA, this._getAssetPath('models/cinema.glb'));
     }
 
     public override async addViews(): Promise<void> {
         ViewsProxy.AddView(new ReactHTMLView(MainThree.VIEW_ID, ViewPlacementId.REACT_THREE, MainThreeReactView));
+
     }
 
     public override async addTheaters(): Promise<void> {
@@ -47,6 +50,7 @@ export class CommonProjectInitCommand extends InitCommandBase {
     public override async initAfterLoad(): Promise<void> {
         AnalyseGLTFCommand.Analyse(ThreeAssetsManager.GetModel(AssetId.GLTF_COMMON), AssetId.GLTF_COMMON);
         AnalyseGLTFCommand.Analyse(ThreeAssetsManager.GetModel(AssetId.GLTF_MAIN), AssetId.GLTF_MAIN);
+        AnalyseGLTFCommand.Analyse(ThreeAssetsManager.GetModel(AssetId.GLTF_CINEMA), AssetId.GLTF_CINEMA);
 
     }
 
