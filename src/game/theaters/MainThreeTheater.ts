@@ -7,6 +7,7 @@ import { TheaterPlacementId } from "../constants/theaters/TheaterPlacementId";
 import { ViewId } from "../constants/views/ViewId";
 import ThreeTheaterBase from "../core/theaters/ThreeTheaterBase";
 import { MainThree } from "../core/_engine/threejs/MainThree";
+import { ProjectInitCommand } from "../commands/inits/project/ProjectInitCommand";
 
 export class MainTheater extends ThreeTheaterBase {
 
@@ -17,9 +18,11 @@ export class MainTheater extends ThreeTheaterBase {
         super(TheaterId.MAIN, TheaterPlacementId.MAIN);
 
         this._initCommandsList.push(new MainInitCommand());
+        this._initCommandsList.push(new ProjectInitCommand());
 
 
         this._siblingViewsList.add(ViewId.ABOUT_REACT);
+        this._siblingViewsList.add(ViewId.PROJECT_REACT);
         // this._viewsList.add(ViewId.PROJECT_REACT);
         this._viewsList.add(ViewId.THREE_MAIN);
         // this._viewsList.add(ViewId.THREE_CINEMA);

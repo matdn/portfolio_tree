@@ -13,7 +13,6 @@ export class ProjectThreeTheater extends ThreeTheaterBase {
     constructor() {
         super(TheaterId.PROJECT, TheaterPlacementId.MAIN);
         this._initCommandsList.push(new ProjectInitCommand());
-
         this._viewsList.add(ViewId.PROJECT_REACT);
         this._cameraId = CameraId.MAIN;
     }

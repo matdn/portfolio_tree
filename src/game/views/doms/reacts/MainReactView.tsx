@@ -1,11 +1,13 @@
 import { AnimatePresence, motion, useTransform } from "framer-motion";
 import gsap from "gsap";
-import { ViewsManager, ViewsProxy } from "pancake";
+import { TheatersManager, TheatersProxy, ViewsManager, ViewsProxy } from "pancake";
 import React, { useEffect, useRef, useState } from "react";
 import { Vector3 } from "three";
 import { ViewId } from "../../../constants/views/ViewId";
 import ReactViewBase, { TransitionProps } from "../../../core/_engine/reacts/views/bases/ReactViewBase";
 import MainThreeView from "../../threes/MainThreeView";
+import Button from "./components/Button";
+import { TheaterId } from "../../../constants/theaters/TheaterId";
 
 export let handleCameraIndexChange: ((index: number) => void) | null = null;
 
@@ -14,7 +16,7 @@ const breakpoints = [
   { title: "", description: "" },
   {
     title: "Musée de <span class='font-bold'>l’Orangerie</span>",
-    techno: "[React, Three.js, WebGL, GSAP]",
+    techno: "[React, Three.js, GSAP]",
     disabled: false
   },
   {
@@ -81,9 +83,10 @@ const MainReactView: React.FC<TransitionProps> = (props) => {
   }, []);
 
   const handleOpenProject = () => {
-    ViewsManager.HideById(ViewId.MAIN_REACT);
-    ViewsManager.HideById(ViewId.THREE_MAIN);
-    ViewsManager.ShowById(ViewId.PROJECT_REACT);
+    // ViewsManager.HideById(ViewId.MAIN_REACT);
+    // ViewsManager.HideById(ViewId.THREE_MAIN);
+    // ViewsManager.ShowById(ViewId.TEST_REACT);
+    TheatersManager.ShowById(TheaterId.PROJECT);
   };
 
   const aboutCall = () => {
@@ -115,7 +118,9 @@ const MainReactView: React.FC<TransitionProps> = (props) => {
     }
   };
 
-
+  const viewProject = () => {
+    const projectView = ViewsProxy.GetView(ViewId.TEST_REACT);
+  }
 
   useEffect(() => {
     handleCameraIndexChange = (index: number) => {
@@ -136,11 +141,25 @@ const MainReactView: React.FC<TransitionProps> = (props) => {
       mainView.setScrollProgress(scrollProgress);
     }
 
-    gsap.to(progressRef.current, {
-      height: `${scrollProgress * 100}%`,
-      duration: 0.3,
-      ease: "power2.out",
-    });
+      // Mobile: grow horizontally (width), Desktop: grow vertically (height)
+      const isMobile = window.innerWidth <= 768;
+      if (progressRef.current) {
+        if (isMobile) {
+          gsap.to(progressRef.current, {
+            width: `${scrollProgress * 100}%`,
+            height: "2px",
+            duration: 0.3,
+            ease: "power2.out",
+          });
+        } else {
+          gsap.to(progressRef.current, {
+            height: `${scrollProgress * 100}%`,
+            width: "2px",
+            duration: 0.3,
+            ease: "power2.out",
+          });
+        }
+      }
   }, [scrollProgress]);
 
   const ScrollDownIndicator = ({ alpha }: { alpha: number; }) => (
@@ -172,22 +191,29 @@ const MainReactView: React.FC<TransitionProps> = (props) => {
       <ScrollDownIndicator alpha={scrollAlpha} />
 
 
-      <div className="fixed right-12 top-1/4 h-[50vh] flex items-center gap-8">
+      <div className="phone-scrollCounter font-mabry fixed right-12 top-1/4 h-[50vh] flex items-center gap-8">
         <motion.div
-          // initial={{ opacity: 0 }}
-          // animate={{ opacity: 1 }}
-          // exit={{ opacity: 0 }}
-          // transition={{ duration: 0.5 }}
-          variants={variant}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.5 }}
         >
-          <p className="text-white font-michroma">{scrollPercent}%</p>
+          <p className="scrollPercent text-white font-michroma">{scrollPercent}%</p>
         </motion.div>
 
-        <div ref={progressRef} className=" bg-white h-0 w-[2px]" />
+        {/* Mobile: horizontal bar, Desktop: vertical bar */}
+        <div
+          ref={progressRef}
+          className="bg-white"
+          style={window.innerWidth <= 768
+            ? { height: "2px", width: 0, position: "absolute", left: 0, bottom: 0 }
+            : { width: "2px", height: 0 }
+          }
+        />
       </div>
 
       {/* Text section */}
-      <div className="fixed top-0 left-0 text-white z-4 flex flex-col items-center justify-center h-[100dvh] w-[100vw]">
+      <div className="fixed top-0 left-0 text-white z-4 flex flex-col items-center justify-center text-center h-[100dvh] w-[100vw]">
         <AnimatePresence mode="wait">
           <motion.span
             key={activeIndex}
@@ -198,9 +224,9 @@ const MainReactView: React.FC<TransitionProps> = (props) => {
             exit={{ opacity: 0, filter: "blur(10px)" }}
             transition={{ duration: 0.4, ease: "easeInOut" }}
           />
+         
         </AnimatePresence>
-
-
+      
         <AnimatePresence mode="wait">
           <motion.p
             key={"desc-" + activeIndex}
@@ -214,6 +240,25 @@ const MainReactView: React.FC<TransitionProps> = (props) => {
           </motion.p>
         </AnimatePresence>
 
+        <AnimatePresence mode="wait">
+          {breakpoints[activeIndex] && !breakpoints[activeIndex].disabled && breakpoints[activeIndex].title && (
+           <motion.div
+            key={"desc-" + activeIndex}
+            className="text-xl mb-8 leading-relaxed opacity-70 font-michroma text-white md:text-[1.2rem] text-[0.8rem]"
+            initial={{ opacity: 0, filter: "blur(10px)" }}
+            animate={{ opacity: 1, filter: "blur(0px)" }}
+            exit={{ opacity: 0, filter: "blur(10px)" }}
+            transition={{ duration: 0.4, ease: "easeInOut" }}
+          >
+             <Button
+              onClick={handleOpenProject}
+              className="text-white font-michroma text-lg"
+              title={"View Project"}
+            />
+          </motion.div> 
+           
+        )}
+        </AnimatePresence>        
 
       </div>
 
