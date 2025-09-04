@@ -1,4 +1,4 @@
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, useTransform } from "framer-motion";
 import gsap from "gsap";
 import { ViewsManager, ViewsProxy } from "pancake";
 import React, { useEffect, useRef, useState } from "react";
@@ -64,7 +64,7 @@ const MainReactView: React.FC<TransitionProps> = (props) => {
   const textRef = useRef<HTMLDivElement>(null);
   const directionRef = useRef(1);
   const scrollAlpha = scrollY < 150 ? 1 - scrollY / 150 : 0;
-
+ 
   useEffect(() => {
     const onScroll = () => {
       requestAnimationFrame(() => {
@@ -93,14 +93,36 @@ const MainReactView: React.FC<TransitionProps> = (props) => {
     mainView.rotateCameraYBy(new Vector3(0, 0, 0), new Vector3(0, 0, 0), 2.5);
   };
 
+
+  const scrollPercent = Math.round(scrollProgress * 100);
+
+
+  const variant = () => {
+    if(scrollY > 2) {
+      return {
+        initial: { opacity: 0 },
+        animate: { opacity: 1 },
+        exit: { opacity: 0 },
+        transition: { duration: 0.5 },
+      };
+    } else if (scrollY > 98) {
+      return {
+        initial: { opacity: 0 },
+        animate: { opacity: 1 },
+        exit: { opacity: 0 },
+        transition: { duration: 0.5 },
+      };
+    }
+  };
+
+
+
   useEffect(() => {
     handleCameraIndexChange = (index: number) => {
       if (index !== activeIndex) {
         const direction = index > activeIndex ? 1 : -1;
         directionRef.current = direction;
-
         setActiveIndex(index);
-
       }
     };
     return () => {
@@ -150,9 +172,18 @@ const MainReactView: React.FC<TransitionProps> = (props) => {
       <ScrollDownIndicator alpha={scrollAlpha} />
 
 
-      <div className="fixed right-12 top-1/4 h-[50vh] flex">
-        <div ref={progressRef} className=" bg-white h-0 w-[2px]" />
+      <div className="fixed right-12 top-1/4 h-[50vh] flex items-center gap-8">
+        <motion.div
+          // initial={{ opacity: 0 }}
+          // animate={{ opacity: 1 }}
+          // exit={{ opacity: 0 }}
+          // transition={{ duration: 0.5 }}
+          variants={variant}
+        >
+          <p className="text-white font-michroma">{scrollPercent}%</p>
+        </motion.div>
 
+        <div ref={progressRef} className=" bg-white h-0 w-[2px]" />
       </div>
 
       {/* Text section */}
@@ -183,32 +214,7 @@ const MainReactView: React.FC<TransitionProps> = (props) => {
           </motion.p>
         </AnimatePresence>
 
-        {/* <AnimatePresence mode="wait">
-          {activeIndex !== 0 && activeIndex !== breakpoints.length - 1 && (
-            breakpoints[activeIndex].disabled ? (
-              <motion.p
-                key="disabled"
-                className="italic text-sm opacity-50"
-                initial={{ opacity: 0, filter: "blur(10px)" }}
-                animate={{ opacity: 1, filter: "blur(0px)" }}
-                exit={{ opacity: 0, filter: "blur(10px)" }}
-                transition={{ duration: 0.4, ease: "easeInOut" }}
-              >
-                Projet en cours…
-              </motion.p>
-            ) : (
-              <motion.div
-                key="button"
-                initial={{ opacity: 0, filter: "blur(10px)" }}
-                animate={{ opacity: 1, filter: "blur(0px)" }}
-                exit={{ opacity: 0, filter: "blur(10px)" }}
-                transition={{ duration: 0.4, ease: "easeInOut" }}
-              >
-                <Button title="Voir le projet" onClick={handleOpenProject} className="w-fit" />
-              </motion.div>
-            )
-          )}
-        </AnimatePresence> */}
+
       </div>
 
     </ReactViewBase >
