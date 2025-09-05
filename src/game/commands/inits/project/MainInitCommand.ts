@@ -18,7 +18,6 @@ import TestThreeView from '../../../views/threes/TestThreeView';
 import CinemaThreeView from '../../../views/threes/CinemaThreeView';
 import { CinemaCameraController } from '../../../cameras/CinemaCameraController';
 import ProjectHeroSection from '../../../views/doms/reacts/ProjectPageTemplate';
-import ProjectPageTemplate from '../../../views/doms/reacts/ProjectPageTemplate';
 
 
 export class MainInitCommand extends InitCommandBase {
@@ -65,8 +64,8 @@ export class MainInitCommand extends InitCommandBase {
 
         // ViewsProxy.AddView(new ReactHTMLView(ViewId.MAIN_REACT, ViewPlacementId.REACT_VIEWS, MainReactView, 0));
         ViewsProxy.AddView(new ReactHTMLView(ViewId.ENTRY_REACT, ViewPlacementId.REACT_ENTRY, EntryReactView, 0));
-        ViewsProxy.AddView(new ReactHTMLView(ViewId.PROJECT_REACT, ViewPlacementId.REACT_VIEWS, ProjectPageTemplate, 0));
-        ViewsProxy.AddView(new ReactHTMLView(ViewId.TEST_REACT, ViewPlacementId.REACT_VIEWS, TestReactView, 0));
+        // ViewsProxy.AddView(new ReactHTMLView(ViewId.PROJECT_REACT, ViewPlacementId.REACT_VIEWS, ProjectPage, 0));
+        ViewsProxy.AddView(new ReactHTMLView(ViewId.TEST_REACT, ViewPlacementId.REACT_VIEWS, ProjectHeroSection, 0));
 
         ViewsProxy.AddView(new ReactHTMLView(ViewId.ABOUT_REACT, ViewPlacementId.REACT_VIEWS, AboutReactView, 0));
 
