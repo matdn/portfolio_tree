@@ -19,20 +19,20 @@ export class MainTheater extends ThreeTheaterBase {
         this._initCommandsList.push(new MainInitCommand());
 
 
-        this._siblingViewsList.add(ViewId.ABOUT_REACT);
-        // this._viewsList.add(ViewId.PROJECT_REACT);
-        this._viewsList.add(ViewId.THREE_MAIN);
+        // this._siblingViewsList.add(ViewId.ABOUT_REACT);
+        this._viewsList.add(ViewId.PROJECT_REACT);
+        // this._viewsList.add(ViewId.THREE_MAIN);
         // this._viewsList.add(ViewId.THREE_CINEMA);
-        this._viewsList.add(ViewId.ENTRY_REACT);
-        this._siblingViewsList.add(ViewId.MAIN_REACT);
+        // this._viewsList.add(ViewId.ENTRY_REACT);
+        // this._siblingViewsList.add(ViewId.MAIN_REACT);
         this._fog = new Fog(0x000000, 60, 250);
         // this._viewsList.add(ViewId.TEST_REACT);
-        // this._viewsList.add(ViewId.TEST_THREE);
+        this._viewsList.add(ViewId.TEST_THREE);
         this._cameraId = CameraId.MAIN;
         // this._threePostProcessingId = PostProcessingId.LEO;
 
         this._environment = {
-            background: 0x000000,
+            background: 0xffffff,
             environmentMapId: null,
             // environmentMapId: AssetId.HDR_STUDIO,
         };

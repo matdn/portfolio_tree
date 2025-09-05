@@ -20,20 +20,20 @@ export default class TestThreeView extends WithoutTransitionThreeView {
         ThreeAssetsManager.GetTexture(AssetId.IMAGE_SIX),
         ThreeAssetsManager.GetTexture(AssetId.IMAGE_THREE),
         ThreeAssetsManager.GetTexture(AssetId.IMAGE_EIGHT),
-        ThreeAssetsManager.GetTexture(AssetId.IMAGE_NINE),
-        ThreeAssetsManager.GetTexture(AssetId.IMAGE_SEVEN),
-        ThreeAssetsManager.GetTexture(AssetId.IMAGE_ONE),
-        ThreeAssetsManager.GetTexture(AssetId.IMAGE_TWO),
-        ThreeAssetsManager.GetTexture(AssetId.IMAGE_FIVE),
-        ThreeAssetsManager.GetTexture(AssetId.IMAGE_FOUR),
-        ThreeAssetsManager.GetTexture(AssetId.IMAGE_SIX),
-        ThreeAssetsManager.GetTexture(AssetId.IMAGE_THREE),
-        ThreeAssetsManager.GetTexture(AssetId.IMAGE_EIGHT),
-        ThreeAssetsManager.GetTexture(AssetId.IMAGE_NINE),
+        // ThreeAssetsManager.GetTexture(AssetId.IMAGE_NINE),
+        // ThreeAssetsManager.GetTexture(AssetId.IMAGE_SEVEN),
+        // ThreeAssetsManager.GetTexture(AssetId.IMAGE_ONE),
+        // ThreeAssetsManager.GetTexture(AssetId.IMAGE_TWO),
+        // ThreeAssetsManager.GetTexture(AssetId.IMAGE_FIVE),
+        // ThreeAssetsManager.GetTexture(AssetId.IMAGE_FOUR),
+        // ThreeAssetsManager.GetTexture(AssetId.IMAGE_SIX),
+        // ThreeAssetsManager.GetTexture(AssetId.IMAGE_THREE),
+        // ThreeAssetsManager.GetTexture(AssetId.IMAGE_EIGHT),
+        // ThreeAssetsManager.GetTexture(AssetId.IMAGE_NINE),
     ];
 
     private _targetRotationY: number = 0;
-    private _rotationRange = Math.PI * 4;
+    private _rotationRange = Math.PI;
 
     private _targetRotationX: number = 0;
     private _targetRotationZ: number = 0;
@@ -44,12 +44,13 @@ export default class TestThreeView extends WithoutTransitionThreeView {
     constructor() {
         super(ViewId.TEST_THREE, ViewPlacementId.THREE_MAIN);
         this._camera = ThreeCamerasProxy.CamerasMap.get('MAIN');
-        this._camera.camera.position.set(0, 0, 60);
+        this._camera.camera.position.set(0, 0, 130);
         this._camera.camera.lookAt(0, 0, 0);
+        this._camera.camera.fov = 25;
 
-        const planeWidth = 8;
-        const planeHeight = 6;
-        const radius = 42;
+        const planeWidth = 30;
+        const planeHeight = 10;
+        const radius = 32;
         const totalAngle = Math.PI * 2;
         const angleStep = totalAngle / this._projectTextures.length;
 
@@ -135,7 +136,7 @@ export default class TestThreeView extends WithoutTransitionThreeView {
         this._group.position.set(0, 0, 0);
 
         this.startCarouselFadeIn();
-        this.startInitialRotation();
+        // this.startInitialRotation();
     }
 
     private startCarouselFadeIn() {
@@ -154,22 +155,22 @@ export default class TestThreeView extends WithoutTransitionThreeView {
         });
     }
 
-    private startInitialRotation() {
-        // Commencez avec une rotation plus importante pour un effet visible
-        this._group.rotation.y = THREE.MathUtils.degToRad(360); // Tourne une fois complète au début
+    // private startInitialRotation() {
+    //     // Commencez avec une rotation plus importante pour un effet visible
+    //     this._group.rotation.y = THREE.MathUtils.degToRad(360); // Tourne une fois complète au début
 
-        gsap.to(this._group.rotation, {
-            y: 0,
-            duration: 4, // Durée un peu plus longue pour un arrêt plus doux
-            delay: 0.8,
-            ease: "power3.out",
-            onComplete: () => {
-                this._group.rotation.y = 0;
-                // MARQUEUR CLÉ : L'animation initiale est terminée, on peut activer le scroll
-                this._isInitialRotationAnimating = false;
-            }
-        });
-    }
+    //     gsap.to(this._group.rotation, {
+    //         y: 0,
+    //         duration: 4, // Durée un peu plus longue pour un arrêt plus doux
+    //         delay: 0.8,
+    //         ease: "power3.out",
+    //         onComplete: () => {
+    //             this._group.rotation.y = 0;
+    //             // MARQUEUR CLÉ : L'animation initiale est terminée, on peut activer le scroll
+    //             this._isInitialRotationAnimating = false;
+    //         }
+    //     });
+    // }
 
     public setRotationProgress(progress: number) {
         this._targetRotationY = progress * this._rotationRange;
@@ -184,13 +185,13 @@ export default class TestThreeView extends WithoutTransitionThreeView {
         super.update(dt);
 
         // NOUVEAU : N'applique la rotation du scroll QUE si l'animation initiale est terminée
-        if (!this._isInitialRotationAnimating) {
-            gsap.to(this._group.rotation, {
-                y: this._targetRotationY,
-                duration: 0.5,
-                ease: "power2.out",
-            });
-        }
+
+        gsap.to(this._group.rotation, {
+            y: this._targetRotationY,
+            duration: 0.5,
+            ease: "power2.out",
+        });
+
 
         // Les rotations X et Z peuvent s'appliquer indépendamment car elles ne sont pas animées au démarrage
         gsap.to(this._group.rotation, {

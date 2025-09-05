@@ -29,6 +29,7 @@ export default {
         mabry: ['Mabry'],
         neue: ['NeueHaas Grotesk Display'],
         roboto: ['Roboto'],
+        nympha: ['Nympha'],
       },
     },
   },

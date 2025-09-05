@@ -150,6 +150,34 @@ body,
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'Nympha';
+  src: url('../../../assets/game/fonts/NymphaTrial-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Nympha';
+  src: url('../../../assets/game/fonts/NymphaTrial-Regular.ttf') format('truetype');
+  font-weight: 800;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Nympha';
+  src: url('../../../assets/game/fonts/NymphaTrial-LightItalic.ttf') format('truetype');
+  font-weight: 300;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Nympha';
+  src: url('../../../assets/game/fonts/NymphaTrial-RegularItalic.ttf') format('truetype');
+  font-weight: 800;
+  font-style: italic;
+}
+
 
 
 canvas {
