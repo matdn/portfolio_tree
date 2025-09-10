@@ -1,11 +1,13 @@
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, useTransform } from "framer-motion";
 import gsap from "gsap";
-import { ViewsManager, ViewsProxy } from "pancake";
+import { TheatersManager, TheatersProxy, ViewsManager, ViewsProxy } from "pancake";
 import React, { useEffect, useRef, useState } from "react";
 import { Vector3 } from "three";
 import { ViewId } from "../../../constants/views/ViewId";
 import ReactViewBase, { TransitionProps } from "../../../core/_engine/reacts/views/bases/ReactViewBase";
 import MainThreeView from "../../threes/MainThreeView";
+import Button from "./components/Button";
+import { TheaterId } from "../../../constants/theaters/TheaterId";
 
 export let handleCameraIndexChange: ((index: number) => void) | null = null;
 
@@ -14,7 +16,7 @@ const breakpoints = [
   { title: "", description: "" },
   {
     title: "Musée de <span class='font-bold'>l’Orangerie</span>",
-    techno: "[React, Three.js, WebGL, GSAP]",
+    techno: "[React, Three.js, GSAP]",
     disabled: false
   },
   {
@@ -64,7 +66,7 @@ const MainReactView: React.FC<TransitionProps> = (props) => {
   const textRef = useRef<HTMLDivElement>(null);
   const directionRef = useRef(1);
   const scrollAlpha = scrollY < 150 ? 1 - scrollY / 150 : 0;
-
+ 
   useEffect(() => {
     const onScroll = () => {
       requestAnimationFrame(() => {
@@ -81,9 +83,10 @@ const MainReactView: React.FC<TransitionProps> = (props) => {
   }, []);
 
   const handleOpenProject = () => {
-    ViewsManager.HideById(ViewId.MAIN_REACT);
-    ViewsManager.HideById(ViewId.THREE_MAIN);
-    ViewsManager.ShowById(ViewId.PROJECT_REACT);
+    // ViewsManager.HideById(ViewId.MAIN_REACT);
+    // ViewsManager.HideById(ViewId.THREE_MAIN);
+    // ViewsManager.ShowById(ViewId.TEST_REACT);
+    TheatersManager.ShowById(TheaterId.PROJECT);
   };
 
   const aboutCall = () => {
@@ -93,14 +96,38 @@ const MainReactView: React.FC<TransitionProps> = (props) => {
     mainView.rotateCameraYBy(new Vector3(0, 0, 0), new Vector3(0, 0, 0), 2.5);
   };
 
+
+  const scrollPercent = Math.round(scrollProgress * 100);
+
+
+  const variant = () => {
+    if(scrollY > 2) {
+      return {
+        initial: { opacity: 0 },
+        animate: { opacity: 1 },
+        exit: { opacity: 0 },
+        transition: { duration: 0.5 },
+      };
+    } else if (scrollY > 98) {
+      return {
+        initial: { opacity: 0 },
+        animate: { opacity: 1 },
+        exit: { opacity: 0 },
+        transition: { duration: 0.5 },
+      };
+    }
+  };
+
+  const viewProject = () => {
+    const projectView = ViewsProxy.GetView(ViewId.TEST_REACT);
+  }
+
   useEffect(() => {
     handleCameraIndexChange = (index: number) => {
       if (index !== activeIndex) {
         const direction = index > activeIndex ? 1 : -1;
         directionRef.current = direction;
-
         setActiveIndex(index);
-
       }
     };
     return () => {
@@ -114,11 +141,25 @@ const MainReactView: React.FC<TransitionProps> = (props) => {
       mainView.setScrollProgress(scrollProgress);
     }
 
-    gsap.to(progressRef.current, {
-      height: `${scrollProgress * 100}%`,
-      duration: 0.3,
-      ease: "power2.out",
-    });
+      // Mobile: grow horizontally (width), Desktop: grow vertically (height)
+      const isMobile = window.innerWidth <= 768;
+      if (progressRef.current) {
+        if (isMobile) {
+          gsap.to(progressRef.current, {
+            width: `${scrollProgress * 100}%`,
+            height: "2px",
+            duration: 0.3,
+            ease: "power2.out",
+          });
+        } else {
+          gsap.to(progressRef.current, {
+            height: `${scrollProgress * 100}%`,
+            width: "2px",
+            duration: 0.3,
+            ease: "power2.out",
+          });
+        }
+      }
   }, [scrollProgress]);
 
   const ScrollDownIndicator = ({ alpha }: { alpha: number; }) => (
@@ -150,17 +191,33 @@ const MainReactView: React.FC<TransitionProps> = (props) => {
       <ScrollDownIndicator alpha={scrollAlpha} />
 
 
-      <div className="fixed right-12 top-1/4 h-[50vh] flex">
-        <div ref={progressRef} className=" bg-white h-0 w-[2px]" />
+      <div className="phone-scrollCounter font-mabry fixed right-12 top-1/4 h-[50vh] flex items-center gap-8">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          <p className="scrollPercent text-white font-michroma">{scrollPercent}%</p>
+        </motion.div>
 
+        {/* Mobile: horizontal bar, Desktop: vertical bar */}
+        <div
+          ref={progressRef}
+          className="bg-white"
+          style={window.innerWidth <= 768
+            ? { height: "2px", width: 0, position: "absolute", left: 0, bottom: 0 }
+            : { width: "2px", height: 0 }
+          }
+        />
       </div>
 
       {/* Text section */}
-      <div className="fixed top-0 left-0 text-white z-4 flex flex-col items-center justify-center h-[100dvh] w-[100vw]">
+      <div className="fixed top-0 left-0 text-white z-4 flex flex-col items-center justify-center text-center h-[100dvh] w-[100vw]">
         <AnimatePresence mode="wait">
           <motion.span
             key={activeIndex}
-            className="block text-7xl uppercase font-extralight leading-tight"
+            className="title block md:text-7xl uppercase font-extralight leading-tight"
             dangerouslySetInnerHTML={{ __html: breakpoints[activeIndex].title }}
             initial={{ opacity: 0, filter: "blur(10px)" }}
             animate={{ opacity: 1, filter: "blur(0px)" }}
@@ -168,8 +225,7 @@ const MainReactView: React.FC<TransitionProps> = (props) => {
             transition={{ duration: 0.4, ease: "easeInOut" }}
           />
         </AnimatePresence>
-
-
+      
         <AnimatePresence mode="wait">
           <motion.p
             key={"desc-" + activeIndex}
@@ -183,32 +239,26 @@ const MainReactView: React.FC<TransitionProps> = (props) => {
           </motion.p>
         </AnimatePresence>
 
-        {/* <AnimatePresence mode="wait">
-          {activeIndex !== 0 && activeIndex !== breakpoints.length - 1 && (
-            breakpoints[activeIndex].disabled ? (
-              <motion.p
-                key="disabled"
-                className="italic text-sm opacity-50"
-                initial={{ opacity: 0, filter: "blur(10px)" }}
-                animate={{ opacity: 1, filter: "blur(0px)" }}
-                exit={{ opacity: 0, filter: "blur(10px)" }}
-                transition={{ duration: 0.4, ease: "easeInOut" }}
-              >
-                Projet en cours…
-              </motion.p>
-            ) : (
-              <motion.div
-                key="button"
-                initial={{ opacity: 0, filter: "blur(10px)" }}
-                animate={{ opacity: 1, filter: "blur(0px)" }}
-                exit={{ opacity: 0, filter: "blur(10px)" }}
-                transition={{ duration: 0.4, ease: "easeInOut" }}
-              >
-                <Button title="Voir le projet" onClick={handleOpenProject} className="w-fit" />
-              </motion.div>
-            )
-          )}
-        </AnimatePresence> */}
+        <AnimatePresence mode="wait">
+          {breakpoints[activeIndex] && !breakpoints[activeIndex].disabled && breakpoints[activeIndex].title && (
+           <motion.div
+            key={"desc-" + activeIndex}
+            className="text-xl mb-8 leading-relaxed opacity-70 font-michroma text-white md:text-[1.2rem] text-[0.8rem]"
+            initial={{ opacity: 0, filter: "blur(10px)" }}
+            animate={{ opacity: 1, filter: "blur(0px)" }}
+            exit={{ opacity: 0, filter: "blur(10px)" }}
+            transition={{ duration: 0.4, ease: "easeInOut" }}
+          >
+             <Button
+              onClick={handleOpenProject}
+              className="text-white font-michroma text-lg"
+              title={"View Project"}
+            />
+          </motion.div> 
+           
+        )}
+        </AnimatePresence>        
+
       </div>
 
     </ReactViewBase >

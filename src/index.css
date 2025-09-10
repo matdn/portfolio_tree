@@ -136,3 +136,32 @@ body,
   z-index: -1;
   /* Place le canvas derrière tout le contenu HTML */
 }
+
+/* ------------------------------------------------------- */
+/*                 MEDIA QUERIES                        */
+/* ------------------------------------------------------- */
+@media (max-width: 768px) {
+  /* Styles pour les écrans de taille moyenne et plus petits */
+  .custom-cursor, .cursor-ring {
+    display: none;
+  }
+  .phone-scrollCounter {
+    top: 0;
+    left: 0;
+    position: fixed;
+    flex-direction: column;
+    justify-content: end;
+    gap: 2rem !important;
+    height: 100dvh;
+    width: 100%;
+    .scrollPercent{
+      display: none;
+    }
+  }
+
+  .title {
+    font-size: 3rem !important;
+    line-height: 1.2 !important;
+    max-width: 80dvw !important;
+  }
+}

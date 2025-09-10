@@ -6,7 +6,9 @@ import React, {
     forwardRef,
     ForwardedRef,
     useImperativeHandle,
+    useState,
 } from 'react';
+import { motion } from 'framer-motion';
 
 type IconPosition = 'left' | 'right';
 
@@ -36,72 +38,76 @@ const Button = forwardRef<ButtonRef, ButtonProps>(
         const title_top = title.split('');
         const title_bottom = title.split('');
 
-        const letterAnimation = (isEnter: boolean) => {
-            const staggerConfig = {
-                each: 0.008,
-                from: isEnter ? ('start' as const) : ('end' as const),
-            };
+        // const letterAnimation = (isEnter: boolean) => {
+        //     const staggerConfig = {
+        //         each: 0.008,
+        //         from: isEnter ? ('start' as const) : ('end' as const),
+        //     };
 
-            return gsap
-                .timeline()
-                .to(
-                    topLettersRef.current,
-                    {
-                        yPercent: isEnter ? -100 : 0,
-                        opacity: isEnter ? 0 : 1,
-                        duration: 0.4,
-                        ease: 'power2.out',
-                        stagger: staggerConfig,
-                    },
-                    0
-                )
-                .to(
-                    bottomLettersRef.current,
-                    {
-                        yPercent: isEnter ? 0 : 100,
-                        opacity: isEnter ? 1 : 0,
-                        duration: 0.4,
-                        ease: 'power2.out',
-                        stagger: staggerConfig,
-                    },
-                    0
-                );
-        };
+        //     return gsap
+        //         .timeline()
+        //         .to(
+        //             topLettersRef.current,
+        //             {
+        //                 yPercent: isEnter ? -100 : 0,
+        //                 opacity: isEnter ? 0 : 1,
+        //                 duration: 0.4,
+        //                 ease: 'power2.out',
+        //                 stagger: staggerConfig,
+        //             },
+        //             0
+        //         )
+        //         .to(
+        //             bottomLettersRef.current,
+        //             {
+        //                 yPercent: isEnter ? 0 : 100,
+        //                 opacity: isEnter ? 1 : 0,
+        //                 duration: 0.4,
+        //                 ease: 'power2.out',
+        //                 stagger: staggerConfig,
+        //             },
+        //             0
+        //         );
+        // };
 
-        useImperativeHandle(forwardedRef, () => ({
-            buttonElement: buttonRef.current,
-            animate: letterAnimation,
-        }));
+        // useImperativeHandle(forwardedRef, () => ({
+        //     buttonElement: buttonRef.current,
+        //     animate: letterAnimation,
+        // }));
 
-        useGSAP(() => {
-            if (!buttonRef.current) return;
+        // useGSAP(() => {
+        //     if (!buttonRef.current) return;
 
-            gsap.set(bottomLettersRef.current, {
-                yPercent: 100,
-                opacity: 0,
-            });
+        //     gsap.set(bottomLettersRef.current, {
+        //         yPercent: 100,
+        //         opacity: 0,
+        //     });
 
-            buttonRef.current.addEventListener('mouseenter', () => {
-                letterAnimation(true);
-            });
+        //     buttonRef.current.addEventListener('mouseenter', () => {
+        //         letterAnimation(true);
+        //     });
 
-            buttonRef.current.addEventListener('mouseleave', () => {
-                letterAnimation(false);
-            });
-        }, []);
+        //     buttonRef.current.addEventListener('mouseleave', () => {
+        //         letterAnimation(false);
+        //     });
+        // }, []);
+
+        const [isHovered, setIsHovered] = useState(false);
 
         return (
             <button
                 ref={buttonRef}
                 onClick={onClick}
                 className={clsx(
-                    'relative px-6 py-1.5 md:px-8 md:py-2 md:rounded-full md:border md:border-2 md:border-white underlign bg-transparent md:bg-transparent flex items-center gap-4 text-white will-change-transform',
+                    'relative px-6 py-1.5 underlign bg-transparent flex items-center gap-4 text-white will-change-transform',
                     className
                 )}
+                onMouseEnter={() => setIsHovered(true)}
+                onMouseLeave={() => setIsHovered(false)}
             >
                 {icon && iconPosition === 'left' && <span ref={iconRef}>{icon}</span>}
 
-                <div className='relative border-white'>
+                <div className='relative border-white flex flex-col items-center'>
                     <div className='flex overflow-hidden gap-[1px]'>
                         {title_top.map((letter, index) => (
                             <span
@@ -133,6 +139,23 @@ const Button = forwardRef<ButtonRef, ButtonProps>(
                             </span>
                         ))}
                     </div>
+                    {/* Underline animée */}
+                    <motion.div
+                        layoutId="underline"
+                        initial={false}
+                        animate={{
+                            width: isHovered ? '100%' : '0%',
+                            opacity: isHovered ? 1 : 0,
+                        }}
+                        transition={{
+                            type: 'spring',
+                            stiffness: 300,
+                            damping: 30,
+                            duration: 0.8,
+                        }}
+                        className="h-[1px] bg-white rounded-full mt-1 w-full"
+                        style={{ alignSelf: 'center' }}
+                    />
                 </div>
 
                 {icon && iconPosition === 'right' && <span ref={iconRef}>{icon}</span>}
