@@ -2,229 +2,171 @@ import React, { useEffect, useRef, useState } from "react";
 import Image from "../../../../components/Image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import ReactViewBase, { TransitionProps } from "../../../core/_engine/reacts/views/bases/ReactViewBase";
+import { ViewsProxy } from "pancake";
+import { ViewId } from "../../../constants/views/ViewId";
+import TestThreeView from "../../threes/TestThreeView";
 
 gsap.registerPlugin(ScrollTrigger);
 
-// Liste des images utilisées pour l'animation d'intro
-const images = [
-    "images/orangerie0.png",
-    "images/orangerie2.png",
-    "images/orangerie3.png",
-    "images/orangerie1.png",
-    "images/orangerie0.png",
-];
+const ProjectPageTemplate: React.FC<TransitionProps> = (props) => {
 
-const ProjectHeroSection = () => {
-    const [currentImage, setCurrentImage] = useState(0);
-
-    const [showText, setShowText] = useState(false);
-
-    const textRef = useRef<HTMLHeadingElement>(null);
-    const imageRef = useRef<HTMLDivElement>(null);
-    const sideTextRef = useRef<HTMLDivElement>(null);
-    const leftTextRef = useRef<HTMLParagraphElement>(null);
-    const rightTextRef = useRef<HTMLParagraphElement>(null);
-    const gridRef = useRef<HTMLDivElement>(null);
-    const gridImagesRef = useRef<(HTMLImageElement | null)[]>([]);
+    const [scrollProgress, setScrollProgress] = useState(0);
+    const containerRef = useRef<HTMLDivElement>(null);
+    const blurLayerRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
-        window.scrollTo({ top: 0, behavior: "auto" });
-    }, []);
+        if (!blurLayerRef.current) return;
+
+        const blurValue = scrollProgress * 60;
+        gsap.to(blurLayerRef.current, {
+            duration: 0.3,
+            ease: "power2.out",
+            backdropFilter: `blur(${blurValue}px)`,
+            webkitBackdropFilter: `blur(${blurValue}px)`,
+        });
+    }, [scrollProgress]);
+
 
     useEffect(() => {
-        const frameDuration = 150;
-        let frameIndex = 0;
-        let timeout: NodeJS.Timeout;
+        const handleScroll = () => {
+            const scrollTop = window.scrollY;
+            const windowHeight = window.innerHeight;
 
-        const animateFrames = () => {
-            gsap.to(imageRef.current, {
-                opacity: 0,
-                duration: 0.1,
-                onComplete: () => {
-                    setCurrentImage(frameIndex);
+            if (containerRef.current && blurLayerRef.current) {
+                const blurTop = blurLayerRef.current.offsetTop;
+                const blurHeight = blurLayerRef.current.offsetHeight;
 
-                    gsap.to(imageRef.current, {
-                        opacity: 1,
-                        duration: 0.1,
-                    });
+                const start = blurTop - windowHeight;
+                const end = blurTop + blurHeight;
 
-                    frameIndex++;
-                    if (frameIndex < images.length - 1) {
-                        timeout = setTimeout(animateFrames, frameDuration);
-                    } else {
-                        setTimeout(() => setShowText(true), 300);
-                    }
-                },
-            });
+                // Clamp le scroll entre 0 et 1
+                const progress = (scrollTop - start) / (end - start);
+                const clamped = Math.min(1, Math.max(0, progress));
+
+                setScrollProgress(clamped);
+            }
         };
 
-        animateFrames();
-
-        return () => clearTimeout(timeout);
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
+
+
     useEffect(() => {
-        if (showText && textRef.current) {
-            gsap.fromTo(
-                textRef.current,
-                { filter: "blur(20px)", opacity: 0 },
-                { filter: "blur(0px)", opacity: 1, duration: 1.5, ease: "power3.out" }
-            );
+        const carouselView = ViewsProxy.GetView(ViewId.TEST_THREE) as TestThreeView;
+
+        if (carouselView) {
+            carouselView.setRotationProgress(scrollProgress);
+            // carouselView.setCarouselInclination(inclinationX, inclinationZ);
         }
-    }, [showText]);
-
-    useEffect(() => {
-        if (sideTextRef.current && leftTextRef.current && rightTextRef.current) {
-            gsap.fromTo(
-                [leftTextRef.current, rightTextRef.current],
-                {
-                    opacity: 0,
-                    filter: "blur(20px)",
-                },
-                {
-                    opacity: 1,
-                    filter: "blur(0px)",
-                    duration: 1.5,
-                    ease: "power3.out",
-                    stagger: 0.2,
-                    scrollTrigger: {
-                        trigger: sideTextRef.current,
-                        start: "top+=200 center", // 🔧 modifie ici le déclenchement
-                        end: "bottom-=200 center",
-                        toggleActions: "play reverse play reverse"
-                        // markers: true,
-                    },
-                }
-            );
-        }
-    }, []);
-
-    // ✨ Animation GSAP des images de la grille en ordre aléatoire
-    useEffect(() => {
-        if (gridRef.current && gridImagesRef.current) {
-            const imgs = gridImagesRef.current.filter(Boolean);
-            const shuffled = imgs
-                .map((img) => ({ img, sort: Math.random() }))
-                .sort((a, b) => a.sort - b.sort)
-                .map((obj) => obj.img);
-
-            gsap.fromTo(
-                shuffled,
-                {
-                    opacity: 0,
-                    filter: "blur(20px)",
-                },
-                {
-                    opacity: 1,
-                    filter: "blur(0px)",
-                    duration: 1,
-                    ease: "power3.out",
-                    stagger: 0.15,
-                    scrollTrigger: {
-                        trigger: gridRef.current,
-                        start: "center center",
-                        end: "bottom center",
-                        toggleActions: "play none none reverse",
-                        markers: true,
-                    },
-                }
-            );
-        }
-    }, []);
-
-    useEffect(() => {
-        const timeout = setTimeout(() => {
-            ScrollTrigger.refresh();
-        }, 500);
-
-        gsap.config({ autoSleep: 60 });
-        ScrollTrigger.config({
-            autoRefreshEvents: "DOMContentLoaded,load,resize",
-        });
-
-        return () => clearTimeout(timeout);
-    }, []);
-
+    }, [scrollProgress]);
     return (
-        <>
-            <section className="relative w-full bg-white min-h-[300vh]">
+        <ReactViewBase {...props} className="z-[500] bg-transparent relative top-0">
 
-                <div className="h-[100dvh] flex items-center justify-center">
-                    {showText && (
-                        <h1
-                            ref={textRef}
-                            className="text-6xl md:text-[10rem] font-light font-mabry text-white mix-blend-difference z-20 tracking-tight text-center"
-                        >
-                            L’ORANGERIE
-                        </h1>
-                    )}
-                </div>
+            <div ref={containerRef} className="w-full min-h-screen  text-black font-sans flex flex-col items-center ">
+                <div className="bg-white w-full px-6 md:px-16 py-12 flex flex-col items-center">
+                    <div className="h-[80dvh] flex flex-col justify-between w-full items-center bg-white">
+                        {/* Titre principal */}
+                        <h1 className=" md:text-[11.75rem] font-medium mb-6 italic uppercase text-center font-mabry">L’orangerie</h1>
 
-                <div className="absolute top-6 left-6 text-sm text-black font-light z-30">
-                    Musée de l’Orangerie
-                </div>
-                <div className="absolute top-6 right-6 text-sm text-black font-light z-30">
-                    ©2025
-                </div>
-
-                <div
-                    ref={imageRef}
-                    className="fixed top-1/2 -translate-y-1/2 w-full flex justify-center items-center z-10"
-                >
-                    <Image
-                        src={images[currentImage]}
-                        alt="Orangerie sticky"
-                        width={800}
-                        height={1200}
-                        className="w-[18dvh] h-[22dvh] object-cover grayscale"
-                        onLoad={() => ScrollTrigger.refresh()}
-                    />
-                </div>
-
-                <div
-                    ref={sideTextRef}
-                    className="flex justify-around items-center h-[100dvh] font-mabry text-[2dvh]"
-                >
-                    <p
-                        ref={leftTextRef}
-                        className="w-[20%] text-gray-400 opacity-0 blur-md"
-                    >
-                        La section musée nous plonge au cœur d’un{" "}
-                        <span className="text-black">parcours narratif</span> autour de et
-                        de son <span className="text-black">l’Orangerie.</span>
-                    </p>
-                    <p
-                        ref={rightTextRef}
-                        className="w-[20%] text-gray-400 text-end opacity-0 blur-md"
-                    >
-                        La section musée nous plonge au cœur d’un{" "}
-                        <span className="text-black">parcours narratif</span> autour de et
-                        de son <span className="text-black">l’Orangerie.</span>
-                    </p>
-                </div>
-
-                <div ref={gridRef} className="grid grid-cols-3 gap-12 h-[100dvh]">
-                    {[...Array(9)].map((_, index) =>
-                        index === 4 ? (
-                            <div key={index} />
-                        ) : (
-                            <div
-                                key={index}
-                                className="flex justify-center items-center w-full h-full"
-                            >
-                                <img
-                                    ref={(el) => (gridImagesRef.current[index] = el)}
-                                    src={`/assets/game/images/orangerie_grid_${index + 1}.png`}
-                                    alt={`Grid ${index + 1}`}
-                                    className="w-[18dvh] h-[22dvh] object-cover grayscale opacity-0 blur-md"
-                                />
+                        {/* Infos principales */}
+                        <div className="gap-8 w-1/2 text-sm md:text-base uppercase tracking-wider font-medium mb-12">
+                            <div className="flex justify-between">
+                                <p className="text-black">Service:</p>
+                                <p>Design, Dev</p>
                             </div>
-                        )
-                    )}
+                            <div className="flex justify-between">
+                                <p className="text-black">Year:</p>
+                                <p>2025</p>
+                            </div>
+                            <div className="flex justify-between">
+                                <p className="text-black">Category:</p>
+                                <p>awwward honorable mention</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Image principale */}
+                    <div className="w-full h-[60vh] md:h-[60vh] mb-16 mt-16">
+                        <Image
+                            src="./images/tmp1.png"
+                            alt="L’orangerie project image"
+                            className="w-full h-full object-cover grayscale-100"
+                        />
+                    </div>
+
+                    {/* Technologies + Description */}
+                    <div className="mb-2 max-w-4xl">
+                        <p className="text-black text-justify uppercase text-[1.2rem] leading-relaxed font-mabry font-extralight">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+                            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                            aliquip ex ea commodo consequat. Duis aute irure dolor in
+                            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                            pariatur. Excepteur sint occaecat cupidatat non proident.
+                        </p>
+                    </div>
+
+                    <div className="flex flex-col w-[56rem] items-center justify-center text-sm pt-20 pb-20">
+                        {/* Crédits */}
+                        <div className="mb-2 flex justify-between w-full font-mabry uppercase ">
+                            <h2 className="font-semibold mb-4 uppercase">Credits</h2>
+                            <ul className="space-y-2">
+                                <li className="text-right">Augustin Briolon<br /> <span className="opacity-50">Art Director</span></li>
+                                <li className="text-right">Marie-Anh Devisy<br /> <span className="opacity-50">Designer</span></li>
+                                <li className="text-right">Zoe Michel<br /> <span className="opacity-50">Developer</span></li>
+                            </ul>
+                        </div>
+                        <div className="w-full h-[1px] bg-black m-4"></div>
+                        {/* Liens */}
+                        <div className="mb-2 flex justify-between w-full">
+                            <div className="flex w-full text-black justify-between uppercase">
+                                <h3 className="text-ml font-semibold mb-4 uppercase">Links</h3>
+                                <ul className="space-y-1 text-right">
+                                    <li><a href="#">Marketplace</a></li>
+                                    <li><a href="#">Website</a></li>
+                                </ul>
+                            </div>
+
+                        </div>
+                        <div className="w-full h-[1px] bg-black m-4"></div>
+                        <div className="flex w-full text-black justify-between uppercase">
+                            <h3 className="text-ml font-semibold mb-4 uppercase">Share</h3>
+                            <ul className="space-y-1 text-right">
+                                <li><a href="#">Pinterest</a></li>
+                                <li><a href="#">TwitterX</a></li>
+                                <li><a href="#">LinkedIn</a></li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
-            </section>
-        </>
+                <div ref={blurLayerRef} className="bg-transparent h-[350dvh] "></div>
+                {/* Autres Projets */}
+                <div className="h-[100dvh] flex flex-col items-center justify-center gap-12 bg-transparent w-full">
+                    <div className="flex justify-center flex-col items-center">
+                        <div className="mb-16 flex w-2/3 justify-between">
+                            <h2 className="text-ml font-semibold mb-6">Other works</h2>
+                            <p className="text-gray-500 italic">S.2</p>
+                        </div>
+                        <h3 className="uppercase font-mabry font-medium text-[10rem] text-center text-white leading-none mix-blend-difference">ZOE MICHEL <br /> portfolio</h3>
+                    </div>
+
+                    {/* Call-to-action */}
+                    <div className="border-t border-gray-200 text-center">
+                        <p className="text-lg mb-4 text-white mt-20">
+                            Envie de concrétiser un projet futur ensemble<br />
+                            ou d’imaginer quelques <span className="font-bold">collaborations à venir</span> ?
+                        </p>
+                        <p className="text-sm uppercase tracking-widest text-gray-500">
+                            Ne disparais pas, restons en contact
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </ReactViewBase>
     );
 };
 
-export default ProjectHeroSection;
+export default ProjectPageTemplate;

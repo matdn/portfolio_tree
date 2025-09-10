@@ -55,7 +55,6 @@ export default class MainThreeView extends WithoutTransitionThreeView {
     constructor() {
         super(ViewId.THREE_MAIN, ViewPlacementId.THREE_MAIN);
         this._snowParticles = new SnowParticles();
-        // this.add(this._snowParticles);
         this._scene = Object3DsProxy.GetObject3D(Object3DId.MAIN);
         this._camera = ThreeCamerasProxy.CamerasMap.get('MAIN');
         this._light = new PointLight(0xffffff, 2000, 0, 2.7);
@@ -64,7 +63,8 @@ export default class MainThreeView extends WithoutTransitionThreeView {
         this._cursorLight = new PointLight(0xffffff, 200, 30);
         this._cursorLight.position.set(0, 0, 0);
         this.add(this._cursorLight);
-        // this.add(new PointLightHelper(this._cursorLight, 1, 0xff0000));
+
+
 
         const dudvMap: Texture = ThreeAssetsManager.GetTexture(AssetId.IMAGE_DUDV);
         dudvMap.wrapS = dudvMap.wrapT = RepeatWrapping;
@@ -269,6 +269,14 @@ export default class MainThreeView extends WithoutTransitionThreeView {
             ease: "power2.inOut"
         });
     }
+
+    public updateCameraFov(windowWidth: number) {
+        const isMobile = windowWidth < 768;
+        this._camera.camera.fov = isMobile ? 80 : 60;
+        this._camera.camera.aspect = window.innerWidth / window.innerHeight;
+        this._camera.camera.updateProjectionMatrix();
+    }
+
 
     private handleMouseMove = (event: MouseEvent) => {
         if (!this._sweaterHasInteracted) {

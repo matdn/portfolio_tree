@@ -11,21 +11,25 @@ import { TheaterId } from "../../../constants/theaters/TheaterId";
 
 export let handleCameraIndexChange: ((index: number) => void) | null = null;
 
-
 const breakpoints = [
   { title: "", description: "" },
   {
     title: "Musée de <span class='font-bold'>l’Orangerie</span>",
     techno: "[React, Three.js, GSAP]",
+
+    subtitle: "awwward project",
+
     disabled: false
   },
   {
     title: "Portfolio <span class='font-bold'>Zoé Michel</span>",
+    subtitle: "School project",
     techno: "[Next, GSAP]",
     disabled: true
   },
   {
     title: "Web App <span class='font-bold'>Kascad</span>",
+    subtitle: "School project",
     techno: "React, Python, Django, PostgreSQL",
     disabled: true
   },
@@ -36,34 +40,36 @@ const breakpoints = [
   },
   {
     title: "Website<span class='font-bold'> Emraude</span>",
+    subtitle: "School project",
     techno: "React, GSAP, Storyblok",
     disabled: true
   },
   {
     title: "<span class='font-bold'>Chanel</span>",
+    subtitle: "School project",
     techno: "React, GSAP",
     disabled: true
   },
   {
     title: "Projet <span class='font-bold'>mystère</span>",
     techno: "React, Three.js, WebGL",
+    subtitle: "School project",
     disabled: true
   },
   {
     title: "Projet <span class='font-bold'>expérimental</span>",
     techno: "React, Three.js, WebGL",
+    subtitle: "School project",
     disabled: true
   },
   { title: "", description: "" },
 ];
-const lerp = (start: number, end: number, t: number) => start * (1 - t) + end * t;
 
 const MainReactView: React.FC<TransitionProps> = (props) => {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [activeIndex, setActiveIndex] = useState(0);
   const [scrollY, setScrollY] = useState(0);
   const progressRef = useRef<HTMLDivElement>(null);
-  const textRef = useRef<HTMLDivElement>(null);
   const directionRef = useRef(1);
   const scrollAlpha = scrollY < 150 ? 1 - scrollY / 150 : 0;
  
@@ -94,6 +100,62 @@ const MainReactView: React.FC<TransitionProps> = (props) => {
     ViewsManager.HideById(ViewId.MAIN_REACT);
     setTimeout(() => ViewsManager.ShowById(ViewId.ABOUT_REACT), 1000);
     mainView.rotateCameraYBy(new Vector3(0, 0, 0), new Vector3(0, 0, 0), 2.5);
+  };
+  useEffect(() => {
+    const updateCameraFov = () => {
+      console.log("📏 resize triggered");
+      const mainView = ViewsProxy.GetView(ViewId.THREE_MAIN);
+      console.log("🎥 mainView:", mainView);
+
+      if (!mainView) {
+        console.warn("⚠️ mainView is undefined!");
+        return;
+      }
+
+      (mainView as MainThreeView).updateCameraFov(window.innerWidth);
+    };
+
+    window.addEventListener("resize", updateCameraFov);
+
+    const waitUntilReady = setInterval(() => {
+      const mainView = ViewsProxy.GetView(ViewId.THREE_MAIN);
+      if (mainView) {
+        console.log("✅ mainView is finally ready, calling updateCameraFov");
+        (mainView as MainThreeView).updateCameraFov(window.innerWidth);
+        clearInterval(waitUntilReady);
+      }
+    }, 200);
+
+    return () => {
+      window.removeEventListener("resize", updateCameraFov);
+      clearInterval(waitUntilReady);
+    };
+  }, []);
+
+
+  const scrollPercent = Math.round(scrollProgress * 100);
+
+
+  const variant = () => {
+    if (scrollY > 2) {
+      return {
+        initial: { opacity: 0 },
+        animate: { opacity: 1 },
+        exit: { opacity: 0 },
+        transition: { duration: 0.5 },
+      };
+    } else if (scrollY > 98) {
+      return {
+        initial: { opacity: 0 },
+        animate: { opacity: 1 },
+        exit: { opacity: 0 },
+        transition: { duration: 0.5 },
+      };
+    }
+  };
+
+  const viewProject = () => {
+    const projectView = ViewsProxy.GetView(ViewId.TEST_REACT);
   };
 
 
@@ -141,6 +203,7 @@ const MainReactView: React.FC<TransitionProps> = (props) => {
       mainView.setScrollProgress(scrollProgress);
     }
 
+
       // Mobile: grow horizontally (width), Desktop: grow vertically (height)
       const isMobile = window.innerWidth <= 768;
       if (progressRef.current) {
@@ -160,6 +223,7 @@ const MainReactView: React.FC<TransitionProps> = (props) => {
           });
         }
       }
+
   }, [scrollProgress]);
 
   const ScrollDownIndicator = ({ alpha }: { alpha: number; }) => (
@@ -167,15 +231,15 @@ const MainReactView: React.FC<TransitionProps> = (props) => {
       {alpha > 0 && (
         <motion.div
           key="scroll-indicator"
-          className="fixed bottom-10 left-1/2 -translate-x-1/2 text-white text-sm z-50 flex flex-col items-center pointer-events-none"
-          initial={{ opacity: 0, filter: "blur(10px)", y: 20, transform: "translateX(-50%)" }}
-          animate={{ opacity: alpha, filter: `blur(${(1 - alpha) * 10}px)`, y: 0, transform: "translateX(-50%)" }}
-          exit={{ opacity: 0, filter: "blur(10px)", y: 20, transform: "translateX(-50%)" }}
-          transition={{ duration: 0.5, ease: "easeInOut", transform: "translateX(-50%)" }}
+          className="fixed bottom-6 left-[47.5%]  text-white text-xs md:text-sm z-50 flex flex-col items-center pointer-events-none"
+          initial={{ opacity: 0, filter: "blur(10px)", y: 20 }}
+          animate={{ opacity: alpha, filter: `blur(${(1 - alpha) * 10}px)`, y: 0 }}
+          exit={{ opacity: 0, filter: "blur(10px)", y: 20 }}
+          transition={{ duration: 0.5, ease: "easeInOut" }}
         >
           <span>Scroll down</span>
           <motion.div
-            className="w-[2px] h-6 bg-white mt-2"
+            className="w-[1px] h-4 md:h-6 bg-white mt-2"
             animate={{ y: [0, 10, 0] }}
             transition={{ repeat: Infinity, duration: 1.2, ease: "easeInOut" }}
           />
@@ -184,10 +248,8 @@ const MainReactView: React.FC<TransitionProps> = (props) => {
     </AnimatePresence>
   );
 
-
   return (
-
-    <ReactViewBase {...props} className="w-screen min-h-[900dvh] relative flex flex-col justify-center items-start">
+    <ReactViewBase {...props} className="w-screen min-h-[600dvh] md:min-h-[900dvh] relative flex flex-col justify-center items-start">
       <ScrollDownIndicator alpha={scrollAlpha} />
 
 
@@ -210,6 +272,7 @@ const MainReactView: React.FC<TransitionProps> = (props) => {
             : { width: "2px", height: 0 }
           }
         />
+
       </div>
 
       {/* Text section */}
@@ -259,10 +322,10 @@ const MainReactView: React.FC<TransitionProps> = (props) => {
         )}
         </AnimatePresence>        
 
-      </div>
 
-    </ReactViewBase >
+      </div>
+    </ReactViewBase>
+
   );
 };
-
 export default MainReactView;

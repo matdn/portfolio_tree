@@ -34,6 +34,7 @@ export class ProjectInitCommand extends InitCommandBase {
 
     public override async addViews(): Promise<void> {
         ViewsProxy.AddView(new ReactHTMLView(ViewId.MAIN_REACT, ViewPlacementId.REACT_VIEWS, MainReactView, 0));
+        console.log("ADDING PROJECT VIEW");
         ViewsProxy.AddView(new ReactHTMLView(ViewId.PROJECT_REACT, ViewPlacementId.REACT_VIEWS, ProjectPage, 0));
     }
 

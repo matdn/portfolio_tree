@@ -7,6 +7,7 @@ import { TheaterPlacementId } from "../constants/theaters/TheaterPlacementId";
 import { ViewId } from "../constants/views/ViewId";
 import ThreeTheaterBase from "../core/theaters/ThreeTheaterBase";
 import { MainThree } from "../core/_engine/threejs/MainThree";
+import { ProjectInitCommand } from "../commands/inits/project/ProjectInitCommand";
 
 export class MainTheater extends ThreeTheaterBase {
 
@@ -17,22 +18,24 @@ export class MainTheater extends ThreeTheaterBase {
         super(TheaterId.MAIN, TheaterPlacementId.MAIN);
 
         this._initCommandsList.push(new MainInitCommand());
+        this._initCommandsList.push(new ProjectInitCommand());
 
 
         this._siblingViewsList.add(ViewId.ABOUT_REACT);
+        this._siblingViewsList.add(ViewId.PROJECT_REACT);
         // this._viewsList.add(ViewId.PROJECT_REACT);
         this._viewsList.add(ViewId.THREE_MAIN);
         // this._viewsList.add(ViewId.THREE_CINEMA);
-        this._viewsList.add(ViewId.ENTRY_REACT);
-        this._siblingViewsList.add(ViewId.MAIN_REACT);
+        // this._viewsList.add(ViewId.ENTRY_REACT);
+        // this._siblingViewsList.add(ViewId.MAIN_REACT);
         this._fog = new Fog(0x000000, 60, 250);
         // this._viewsList.add(ViewId.TEST_REACT);
-        // this._viewsList.add(ViewId.TEST_THREE);
+        this._viewsList.add(ViewId.TEST_THREE);
         this._cameraId = CameraId.MAIN;
         // this._threePostProcessingId = PostProcessingId.LEO;
 
         this._environment = {
-            background: 0x000000,
+            background: 0xffffff,
             environmentMapId: null,
             // environmentMapId: AssetId.HDR_STUDIO,
         };

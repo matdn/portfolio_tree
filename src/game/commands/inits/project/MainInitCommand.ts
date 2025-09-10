@@ -17,6 +17,7 @@ import TestReactView from '../../../views/doms/reacts/TestReactView';
 import TestThreeView from '../../../views/threes/TestThreeView';
 import CinemaThreeView from '../../../views/threes/CinemaThreeView';
 import { CinemaCameraController } from '../../../cameras/CinemaCameraController';
+import ProjectHeroSection from '../../../views/doms/reacts/ProjectPageTemplate';
 
 
 export class MainInitCommand extends InitCommandBase {
@@ -33,17 +34,17 @@ export class MainInitCommand extends InitCommandBase {
 
 
     public override async initCommon(): Promise<void> {
-        ThreeAssetsManager.AddTexture(AssetId.IMAGE_ONE, this._getAssetPath('images/img1.png'));
-        ThreeAssetsManager.AddTexture(AssetId.IMAGE_TWO, this._getAssetPath('images/img2.png'));
-        ThreeAssetsManager.AddTexture(AssetId.IMAGE_THREE, this._getAssetPath('images/orangerieMain.png'));
-        ThreeAssetsManager.AddTexture(AssetId.IMAGE_FOUR, this._getAssetPath('images/2.26tours.png'));
-        ThreeAssetsManager.AddTexture(AssetId.IMAGE_FIVE, this._getAssetPath('images/img0.png'));
-        ThreeAssetsManager.AddTexture(AssetId.IMAGE_SIX, this._getAssetPath('images/image1.jpg'));
-        ThreeAssetsManager.AddTexture(AssetId.IMAGE_SEVEN, this._getAssetPath('images/kadija1.png'));
-        ThreeAssetsManager.AddTexture(AssetId.IMAGE_EIGHT, this._getAssetPath('images/kascad1.png'));
-        ThreeAssetsManager.AddTexture(AssetId.IMAGE_NINE, this._getAssetPath('images/oblique1.png'));
-        ThreeAssetsManager.AddTexture(AssetId.IMAGE_DUDV, this._getAssetPath('images/waterdudv.jpg'));
-        ThreeAssetsManager.AddTexture(AssetId.TEXT_BLUR, this._getAssetPath('images/black-blur-uniform-opacity 1.png'));
+        ThreeAssetsManager.AddTexture(AssetId.IMAGE_ONE, this._getAssetPath('images/or1.png'));
+        ThreeAssetsManager.AddTexture(AssetId.IMAGE_TWO, this._getAssetPath('images/or2.png'));
+        ThreeAssetsManager.AddTexture(AssetId.IMAGE_THREE, this._getAssetPath('images/or3.png'));
+        ThreeAssetsManager.AddTexture(AssetId.IMAGE_FOUR, this._getAssetPath('images/or4.png'));
+        ThreeAssetsManager.AddTexture(AssetId.IMAGE_FIVE, this._getAssetPath('images/or5.png'));
+        ThreeAssetsManager.AddTexture(AssetId.IMAGE_SIX, this._getAssetPath('images/or6.png'));
+        ThreeAssetsManager.AddTexture(AssetId.IMAGE_SEVEN, this._getAssetPath('images/or2.png'));
+        ThreeAssetsManager.AddTexture(AssetId.IMAGE_EIGHT, this._getAssetPath('images/or3.png'));
+        ThreeAssetsManager.AddTexture(AssetId.IMAGE_NINE, this._getAssetPath('images/or6.png'));
+        ThreeAssetsManager.AddTexture(AssetId.IMAGE_DUDV, this._getAssetPath('images/or5.png'));
+        ThreeAssetsManager.AddTexture(AssetId.TEXT_BLUR, this._getAssetPath('images/or4.png'));
     }
 
     public override async initPixi(): Promise<void> {
@@ -57,14 +58,14 @@ export class MainInitCommand extends InitCommandBase {
     }
 
     public override async addViews(): Promise<void> {
-        ViewsProxy.AddViewConstructor(ViewId.THREE_MAIN, MainThreeView);
+        // ViewsProxy.AddViewConstructor(ViewId.THREE_MAIN, MainThreeView);
         ViewsProxy.AddViewConstructor(ViewId.TEST_THREE, TestThreeView);
         ViewsProxy.AddViewConstructor(ViewId.THREE_CINEMA, CinemaThreeView);
 
-        ViewsProxy.AddView(new ReactHTMLView(ViewId.MAIN_REACT, ViewPlacementId.REACT_VIEWS, MainReactView, 0));
+        // ViewsProxy.AddView(new ReactHTMLView(ViewId.MAIN_REACT, ViewPlacementId.REACT_VIEWS, MainReactView, 0));
         ViewsProxy.AddView(new ReactHTMLView(ViewId.ENTRY_REACT, ViewPlacementId.REACT_ENTRY, EntryReactView, 0));
         // ViewsProxy.AddView(new ReactHTMLView(ViewId.PROJECT_REACT, ViewPlacementId.REACT_VIEWS, ProjectPage, 0));
-        ViewsProxy.AddView(new ReactHTMLView(ViewId.TEST_REACT, ViewPlacementId.REACT_VIEWS, TestReactView, 0));
+        ViewsProxy.AddView(new ReactHTMLView(ViewId.TEST_REACT, ViewPlacementId.REACT_VIEWS, ProjectHeroSection, 0));
 
         ViewsProxy.AddView(new ReactHTMLView(ViewId.ABOUT_REACT, ViewPlacementId.REACT_VIEWS, AboutReactView, 0));
 
