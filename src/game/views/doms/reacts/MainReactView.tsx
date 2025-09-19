@@ -224,7 +224,6 @@ const MainReactView: React.FC<TransitionProps> = (props) => {
             exit={{ opacity: 0, filter: "blur(10px)" }}
             transition={{ duration: 0.4, ease: "easeInOut" }}
           />
-         
         </AnimatePresence>
       
         <AnimatePresence mode="wait">
@@ -259,7 +258,6 @@ const MainReactView: React.FC<TransitionProps> = (props) => {
            
         )}
         </AnimatePresence>        
-        <h2>update</h2>
       </div>
 
     </ReactViewBase >
