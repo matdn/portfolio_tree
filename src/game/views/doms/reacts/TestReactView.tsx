@@ -1,112 +1,170 @@
-import React, { useEffect, useRef, useState } from "react";
-import { ViewsManager, ViewsProxy } from "pancake";
-import { ViewId } from "../../../constants/views/ViewId";
-import TestThreeView from "../../threes/TestThreeView";
-import { gsap } from "gsap";
+import React, { Suspense, useRef, useEffect } from "react";
+import { Canvas, useThree, useFrame } from "@react-three/fiber";
+import { Float, Html, OrbitControls, useGLTF } from "@react-three/drei";
+import * as THREE from "three";
+import gsap from "gsap";
+import { CarouselRing } from "./components/CarouselRing";
 
+type ModelProps = { url: string; scale?: number | [number, number, number] };
 
+// ====== Camera tween (après 1s -> va à [0,0,65]) ======
+function CameraAnimation() {
+  const { camera } = useThree();
+  useEffect(() => {
+    const tween = gsap.to(camera.position, {
+      x: 0, y: 0, z: 65,
+      duration: 2,
+      delay: 1,
+      ease: "power2.inOut",
+      onUpdate: () => camera.lookAt(0, 0, 0),
+    });
+    return () => tween.kill();
+  }, [camera]);
+  return null;
+}
+
+// ====== OrbitControls qui suit la roche + lock vertical après 5s ======
+function RockFocusControls({
+  rockRef,
+  lockAfterMs = 5000,
+  lockAt = Math.PI / 2,
+}: {
+  rockRef: React.RefObject<THREE.Group>;
+  lockAfterMs?: number;
+  lockAt?: number;
+}) {
+  const controlsRef = useRef<any>(null);
+
+  useFrame(() => {
+    if (controlsRef.current && rockRef.current) {
+      controlsRef.current.target.lerp(rockRef.current.position, 0.2);
+      controlsRef.current.update();
+    }
+  });
+
+  useEffect(() => {
+    const t = setTimeout(() => {
+      if (!controlsRef.current) return;
+      controlsRef.current.minPolarAngle = lockAt;
+      controlsRef.current.maxPolarAngle = lockAt;
+      controlsRef.current.update();
+    }, lockAfterMs);
+    return () => clearTimeout(t);
+  }, [lockAfterMs, lockAt]);
+
+  return (
+    <OrbitControls
+      ref={controlsRef}
+      enablePan={false}
+      minDistance={10}
+      maxDistance={200}
+      // pas de min/maxPolarAngle au départ, on les pose après lockAfterMs
+    />
+  );
+}
+
+function FloatingChildren({ url, scale = 1 }: ModelProps) {
+  const { scene } = useGLTF(url);
+  const group = useRef<THREE.Group>(null!);
+
+  useEffect(() => {
+    scene.traverse((obj) => {
+      if ((obj as THREE.Mesh).isMesh) {
+        const m = obj as THREE.Mesh;
+        m.castShadow = true;
+        m.receiveShadow = true;
+      }
+      if (!obj.userData.__basePos) obj.userData.__basePos = obj.position.clone();
+      if (!obj.userData.__phase) obj.userData.__phase = Math.random() * Math.PI * 2;
+      if (!obj.userData.__amp) obj.userData.__amp = 0.06 + Math.random() * 0.06;
+    });
+  }, [scene]);
+
+  useFrame(({ clock }) => {
+    const t = clock.getElapsedTime();
+    scene.traverse((obj) => {
+      if (!obj.userData.__basePos) return;
+      const base: THREE.Vector3 = obj.userData.__basePos;
+      const phase: number = obj.userData.__phase;
+      const amp: number = obj.userData.__amp;
+      obj.position.set(base.x, base.y + Math.sin(t * 1.2 + phase) * amp, base.z);
+    });
+    if (group.current) group.current.rotation.y = Math.sin(t * 0.1) * 0.05;
+  });
+
+  return (
+    <group ref={group} scale={scale}>
+      <primitive object={scene} />
+    </group>
+  );
+}
+useGLTF.preload("./assets/game/models/rocks.glb");
+
+// ====== VIEW ======
 const TestReactView: React.FC = () => {
-    const [scrollProgress, setScrollProgress] = useState(0);
-    const containerRef = useRef<HTMLDivElement>(null);
-    const blurLayerRef = useRef<HTMLDivElement>(null);
+  const rockRef = useRef<THREE.Group>(null);
 
-    useEffect(() => {
-        if (!blurLayerRef.current) return;
+  const images = [
+    "./assets/game/images/img1.png",
+    "./assets/game/images/img2.png",
+    "./assets/game/images/img3.png",
+    "./assets/game/images/img4.png",
+    "./assets/game/images/img0.png",
+    "./assets/game/images/img3.png",
+    "./assets/game/images/img1.png",
+    "./assets/game/images/img2.png",
+    "./assets/game/images/img4.png",
+    "./assets/game/images/img4.png",
+    "./assets/game/images/img0.png",
+    "./assets/game/images/img3.png",
+    "./assets/game/images/img0.png",
+    "./assets/game/images/img3.png",
+    "./assets/game/images/img1.png",
+    "./assets/game/images/img2.png",
+    "./assets/game/images/img4.png",
+    "./assets/game/images/img4.png",
+    "./assets/game/images/img0.png",
+    "./assets/game/images/img3.png",
+  ];
 
-        const blurValue = scrollProgress * 60;
-        gsap.to(blurLayerRef.current, {
-            duration: 0.3,
-            ease: "power2.out",
-            backdropFilter: `blur(${blurValue}px)`,
-            webkitBackdropFilter: `blur(${blurValue}px)`,
-        });
-    }, [scrollProgress]);
+  return (
+    <div className="relative h-[100dvh] bg-white">
+      <Canvas dpr={[1, 2]} camera={{ position: [0, 180, 0], fov: 75 }} shadows>
+        <pointLight position={[0, 12, 0]} intensity={1000} />
+        <pointLight position={[0, -12, 0]} intensity={1000} />
+        {/* <ambientLight intensity={10} /> */}
+        <CameraAnimation />
+        <RockFocusControls rockRef={rockRef} lockAfterMs={5000} lockAt={Math.PI / 2} />
 
+        <Suspense
+          fallback={
+            <Html center>
+              <div style={{ fontFamily: "system-ui", fontSize: 14 }}>Chargement du modèle…</div>
+            </Html>
+          }
+        >
+          <CarouselRing
+            images={images}
+            radius={42}
+            planeWidth={12}
+            planeHeight={6}
+            progress={0}
+            rotationX={0}
+            rotationZ={0}
+            rotationRange={Math.PI * 2}
+            initialSpin
+            position={[0, 0, 0]}
+          />
 
-    useEffect(() => {
-        const handleScroll = () => {
-            const scrollTop = window.scrollY;
-            const windowHeight = window.innerHeight;
-
-            if (containerRef.current && blurLayerRef.current) {
-                const blurTop = blurLayerRef.current.offsetTop;
-                const blurHeight = blurLayerRef.current.offsetHeight;
-
-                const start = blurTop - windowHeight;
-                const end = blurTop + blurHeight;
-
-                // Clamp le scroll entre 0 et 1
-                const progress = (scrollTop - start) / (end - start);
-                const clamped = Math.min(1, Math.max(0, progress));
-
-                setScrollProgress(clamped);
-            }
-        };
-
-        window.addEventListener("scroll", handleScroll);
-        return () => window.removeEventListener("scroll", handleScroll);
-    }, []);
-
-
-
-    useEffect(() => {
-        const carouselView = ViewsProxy.GetView(ViewId.TEST_THREE) as TestThreeView;
-
-        if (carouselView) {
-            carouselView.setRotationProgress(scrollProgress);
-            // carouselView.setCarouselInclination(inclinationX, inclinationZ);
-        }
-    }, [scrollProgress]);
-
-    return (
-        <div className="relative h-[1000dvh]" ref={containerRef}>
-            {/* Hero flouté (scrollable) */}
-            <div
-                className="fixed top-0 left-0 w-full h-[100dvh] flex justify-center items-center px-8 pb-6 text-base md:text-[12dvh] uppercase font-mabry font-light z-50"
-                style={{
-                    mixBlendMode: "difference"
-                }}
-            >
-                <h1 className="text-white ">l'Orangerie</h1>
-            </div>
-
-            {/* Calque flou (scrollable mais en haut visuellement) */}
-            <div
-                ref={blurLayerRef}
-                className="h-[900dvh] bg-black/0 relative z-10"
-                style={{
-                    backdropFilter: "blur(0px)", // départ à 0
-                    WebkitBackdropFilter: "blur(0px)",
-                }}
-            >
-
-                {/* 1er écran vide */}
-                <div className="h-[100dvh]"></div>
-
-                {/* 2e écran : image + fond sous image */}
-                <div className="h-[100dvh] relative">
-                    {/* Image au-dessus du flou */}
-                    <img
-                        src="./assets/game/images/orangerie_grid_7.png"
-                        alt=""
-                        className="w-[45dvw] absolute left-10 top-20 z-30 grayscale"
-                    />
-                    <img
-                        src="./assets/game/images/orangerie_grid_7.png"
-                        alt=""
-                        className="w-[45dvw] absolute bottom-10 right-20 z-30 grayscale"
-                    />
-
-                    {/* Bloc blur sous l’image */}
-                    <div className="absolute left-20 top-20 bg-black/60 h-[25dvh] w-[40dvw] z-100 " style={{
-                        backdropFilter: "blur(60px)",
-                        WebkitBackdropFilter: "blur(60px)",
-                    }}></div>
-                </div>
-            </div>
-        </div>
-
-    );
+          <Float speed={1} rotationIntensity={2} floatIntensity={5}>
+            <group ref={rockRef}>
+              <FloatingChildren url="./assets/game/models/rocks.glb" scale={1} />
+            </group>
+          </Float>
+        </Suspense>
+      </Canvas>
+    </div>
+  );
 };
 
 export default TestReactView;
